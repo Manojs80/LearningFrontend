@@ -1,14 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ThemeMode } from './ThemeMode'
 import { Link } from 'react-router-dom'
 
 export const Header = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Toggle function to handle open/close state
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <>
-<div className="navbar bg-base-100"> 
+<div className="navbar bg-base-100 "
+    style={{ marginBottom: isOpen ? '0' : '2rem' }}
+> 
 
   <div className="navbar-start">
-    <div className="dropdown">
+    <div className="dropdown ">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -26,12 +34,13 @@ export const Header = () => {
       <ul
         tabIndex={0}
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-        <li><Link to="/">Home</Link></li>
+        <li><Link to="/home">Home</Link></li>
         <li>
           <a>Courses</a>
           <ul className="p-2">
-          <li><Link to="/Learner">Learner</Link></li>
-          <li><Link to="/Instructor">Instructor</Link></li> 
+          <li><Link to="/Learner/Course/66c431f1c8addb7d24853198">Learner</Link></li>
+          <li><Link to="/Instructor/Course/66c431f1c8addb7d24853198">Instructor</Link></li> 
+          <li><Link to="/Admin">Admin</Link></li> 
           </ul>
         </li>
         <li><Link to="/login">Login</Link></li>
@@ -43,13 +52,16 @@ export const Header = () => {
 
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
-      <li><Link to="/">Home</Link></li>
+      <li><Link to="/home">Home</Link></li>
       <li>
-        <details>
+        <details  open={isOpen} // Control the open state
+        onClick={handleToggle} // Toggle state on click
+         >
           <summary>Courses</summary>
-          <ul className="p-2">
-          <li><Link to="/Learner">Learner</Link></li>
-           <li><Link to="/Instructor">Instructor</Link></li>  
+          <ul className="p-1">
+          <li><Link to="/Learner/Course/66c431f1c8addb7d24853198">Learner</Link></li>
+           <li><Link to="/Instructor/Course/66c431f1c8addb7d24853198">Instructor</Link></li>
+           <li><Link to="/Admin">Admin</Link></li>   
           </ul>
         </details>
       </li>
@@ -59,7 +71,10 @@ export const Header = () => {
   </div>
   <div className="navbar-end">
     <ThemeMode/>
-    <a className="btn">Contact Us</a>
+    
+    <button className=" btn bg-blue-700 hover:bg-blue-500  font-bold">
+      <Link to="/contact">Contact Us</Link> 
+      </button>
   </div>
 </div>
    

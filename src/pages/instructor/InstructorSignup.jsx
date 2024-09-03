@@ -3,9 +3,9 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { CreateLearner, DetailsLearner, UpdateLearner } from '../../api/Routing';
+import { CreateInstuctor, DetailsInstructor, UpdateInstuctor } from '../../api/Routing';
 
-export const  LearnerSignup = ()=> {
+export const  InstructorSignup = ()=> {
   const { register, handleSubmit, reset, setValue } = useForm();
   const navigate = useNavigate();
   const { id } = useParams();
@@ -14,7 +14,7 @@ export const  LearnerSignup = ()=> {
   const loadData = async () => {
     if (!isEdit) return;
     try {
-      const res = await DetailsLearner(id);
+      const res = await DetailsInstructor(id);
       const formData = res.data;
       console.log(formData);
       Object.keys(formData).forEach(key => {
@@ -39,10 +39,10 @@ export const  LearnerSignup = ()=> {
       console.log(key, value);
   }
     try {
-      {isEdit ? await UpdateLearner(id, formData) : await CreateLearner(formData);}
+      {isEdit ? await UpdateInstuctor(id, formData) : await CreateInstuctor(formData);}
       //console.log(response.data,"response.data");
       toast.success("Success");
-      navigate('/Learner/quizs');
+      navigate('/instuctor/quizs');
     } catch (error) {
       console.log("Error adding product:", error.response.data);
       toast.error(error.response.data.error);
@@ -85,8 +85,8 @@ export const  LearnerSignup = ()=> {
                   <input type="text" {...register("course")} className="bg-white border border-gray-300 rounded p-2" />
                 </div>               
                 <div>
-                  <label className="block text-red-500 font-medium mb-3">Mobile No:</label>
-                  <input type="text" {...register("mobile")} className="bg-white border border-gray-300 rounded p-2" />
+                  <label className="block text-red-500 font-medium mb-3">Role</label>
+                  <input type="text" {...register("role")} className="bg-white border border-gray-300 rounded p-2" />
                 </div>
                 <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
                   Submit
@@ -101,13 +101,3 @@ export const  LearnerSignup = ()=> {
 }
 
 
-// const fileInput = document.getElementById("image");
-// if (fileInput && fileInput.files[0]) {
-//   formData.append("image", fileInput.files[0]);
-// }
-
-
-{/* <div>
-<label className="block text-red-500 font-medium mb-1">Upload Image</label>
-<input type="file" name="image" id="image" {...register("image")} className="border border-gray-300 rounded p-2" />
-</div> */}

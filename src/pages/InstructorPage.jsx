@@ -4,7 +4,7 @@ import { Link, Outlet } from 'react-router-dom'
 import { LearnerHeader } from '../components/LearnerHeader'
 import { ArrowLeftFromLine, ArrowRightFromLine } from 'lucide-react'
 
-export const LearnerPage = () => {
+export const InstructorPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
     const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
@@ -17,14 +17,15 @@ export const LearnerPage = () => {
           } `}
         >
           <div className="p-4">
-            <h2 className="text-2xl font-bold mb-4">L.Name</h2>
+            <h2 className="text-2xl font-bold mb-4">I.Name</h2>
             <ul  className="font-bold mb-4">
-            <li className="mb-2"><Link to="66c21e5d525f93085956f0ab" className="text-blue-600 hover:underline">Profile</Link></li>
+            <li className="mb-2"><Link to="66c2ddec1943acbb8bdd9cc1" className="text-blue-600 hover:underline">Profile</Link></li>
             <li className="mb-2"><Link to="home" className="text-blue-600 hover:underline">Home</Link></li>
             <li className="mb-2"><Link to="Course/66c431f1c8addb7d24853198" className="text-blue-600 hover:underline">Courses</Link></li>
-            <li className="mb-2"><Link to="AssignmentList/66c2350e0914e4ea1199fc4a" className="text-blue-600 hover:underline">Assignments</Link></li>
+            <li className="mb-2"><Link to="AssignmentList/66d552db2b47076d37d8ed64" className="text-blue-600 hover:underline">Assignments</Link></li>
             <li className="mb-2"><Link to="Quizs" className="text-blue-600 hover:underline">Quizs</Link></li>
-            <li className="mb-2"><Link to="feedback-message" className="text-blue-600 hover:underline">Feedback/Message</Link></li>             
+            <li className="mb-2"><Link to="suggestion" className="text-blue-600 hover:underline">Suggestion</Link></li>             
+             
             </ul>
           </div>
         </aside> 
