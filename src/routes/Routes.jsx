@@ -27,6 +27,9 @@ import { FeedbackMessage } from "../components/FeedbackMessage";
 import { Assignment } from "../pages/course/Assignment";
 import { AdminFM } from "../pages/admin/AdminFM";
 import { Quiz } from "../pages/course/Quiz";
+import { UserAuth } from "./UserAuth";
+import { InstructorAuth } from "./InstructorAuth";
+import { AdminAuth } from "./AdminAuth";
 
 
 
@@ -38,6 +41,10 @@ export const router = createBrowserRouter([
       children: [
         {
           path: "home",
+          element: <CourseCard/>
+        },
+        {
+          path: '',
           element: <CourseCard/>
         },
         {
@@ -61,13 +68,14 @@ export const router = createBrowserRouter([
     },
     {
       path: "/Learner/",
-      element:  <LearnerPage/>,
+      element: <UserAuth><LearnerPage/></UserAuth>,
       errorElement: <ErrorPage/>,
       children: [
          {
           path: ":id",
           element: <LearnerProfile/>
         },
+        
         {
           path: "home",
           element: <CourseCard/>
@@ -96,7 +104,7 @@ export const router = createBrowserRouter([
     },
     {
       path: "/Instructor/",
-      element:  <InstructorPage/>,
+      element:  <InstructorAuth><InstructorPage/></InstructorAuth>,
       errorElement: <ErrorPage/>,
       children: [
          {
@@ -155,7 +163,7 @@ export const router = createBrowserRouter([
     },
     {
       path: "/Admin/",
-      element:  <AdminPage/>,
+      element:  <AdminAuth><AdminPage/></AdminAuth>,
       errorElement: <ErrorPage/>,
       children: [
          {

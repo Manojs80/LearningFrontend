@@ -37,12 +37,16 @@ export const LoginPage = () => {
       } else {
           toast.error('Unexpected response structure.');
       }
+      
+      
       if (role === 'learner') {
-        navigate('/learner'); 
+        console.log("role(learner)",role);
+        navigate('/learner/Course/66c431f1c8addb7d24853198'); 
      } else if (role === 'instructor') {
-      navigate('/instructor');
+      console.log("role2",role);
+      navigate('/instructor/Course/66c431f1c8addb7d24853198');
      } else if (role === 'admin') {
-      navigate('/admin');
+      navigate('/admin/home');
      }
       
       

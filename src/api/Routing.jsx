@@ -91,8 +91,7 @@ export const Learnerlogin = async (data)=> {
               method: 'post',
               url: `${apiUrl}/v1/user/login`,
               data, 
-              
-              
+              withCredentials:true,              
             });
           return  response.data
       } catch (error) {
@@ -635,6 +634,20 @@ export const DeleteContact = async (id)=> {
           method: 'delete',
           url: `${apiUrl}/v1/contact/delete/${id}`,
           
+        });
+      return  response.data
+  } catch (error) {
+    throw error  
+  }
+}
+//loguot
+export const Logout = async ()=> {
+  console.log("Logout frontapi",`${apiUrl}/v1/logout`);
+  try {
+      const response = await axios({
+          method: 'post',
+          url: `${apiUrl}/v1/logout`,
+          credentials: 'include',
         });
       return  response.data
   } catch (error) {

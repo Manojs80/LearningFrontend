@@ -1,10 +1,28 @@
 import React from 'react'
 import { ThemeMode } from './ThemeMode'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import { Logout } from '../api/Routing';
+import { toast } from 'react-toastify';
+
 
 
 
 export const LearnerHeader = () => {
+
+  const navigate = useNavigate();
+
+  const handleClick = async () => {
+    try {
+      await Logout();
+     //  Remove the Quiz item from state after deletion
+     document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+     toast.success("Success");
+      console.log('logout succesfully');
+      navigate('/login')
+    } catch (error) {
+      console.error('Error in logout:', error);
+    }
+  };
     const defaultImage = "https://icons.veryicon.com/png/o/miscellaneous/standard/user-274.png"
    //const imageSrc =  instructor.image || defaultImage ;
   
@@ -33,8 +51,9 @@ export const LearnerHeader = () => {
     <div className="hidden sm:block ">        
       <ThemeMode/>
       </div>
-      <button className=" btn bg-red-600 font-bold">
-      <Link to="/login">Log Out</Link> 
+      <button onClick={() => handleClick()} className=" btn bg-red-600 font-bold">
+          Log Out 
+      
       </button>   
     </div>
   </div>
