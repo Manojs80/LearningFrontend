@@ -19,8 +19,8 @@ import { InstructorQuizList } from "../pages/instructor/InstructorQuizList";
 import { AdminPage } from "../pages/AdminPage";
 import { AdminProfile } from "../pages/admin/AdminProfile";
 import { AdminClassroom } from "../pages/admin/AdminClassroom";
-import { AdminAssignment } from "../pages/admin/AdminAssignment";
-import { AdminQuizList } from "../pages/admin/AdminQuizList";
+import {  AdminLearners } from "../pages/admin/AdminLearners";
+import { AdminInstructors } from "../pages/admin/AdminInstructors";
 import { SignUpPage } from "../pages/SignUpPage";
 import { Contact } from "../components/Contact";
 import { FeedbackMessage } from "../components/FeedbackMessage";
@@ -37,6 +37,8 @@ import { LearnerQuiz } from "../pages/learner/LearnerQuiz";
 import { CourseCreateEdit } from "../pages/course/CourseCreateEdit";
 import { InstructorHome } from "../pages/instructor/InstructorHome";
 import { QuizAdd } from "../pages/course/QuizAdd";
+import { AdminAssignments } from "../pages/admin/AdminAssignments";
+import { AdminQuizList } from "../pages/admin/AdminQuizList";
 
 
 
@@ -217,21 +219,45 @@ export const router = createBrowserRouter([
           element: <CourseCard/>
         },
         {
-          path: "course/:id",
+          path: "Courses",
           element: <AdminClassroom/>
+        },
+        {
+          path: "Courses/:id",
+          element: <CourseDetail/>
         },
        
         {
-          path: "AssignmentList",
-          element:  <AdminAssignment/>
+          path: "Instructors",
+          element:  <AdminInstructors/>
         },
         {
-          path: "AssignmentList/assignment/:id",
-          element:  <Assignment/>
+          path: "Instructors/:id",
+          element:  <InstructorQuizList/>
         },
         {
-          path: "quizs",
+          path: "Assignments",
+          element:  <AdminAssignments/>
+        },
+        {
+          path: "Assignments/:id",
+          element:  <InstructorAssignment/>
+        },
+        {
+          path: "Learners",
+          element:  <AdminLearners/>
+        },
+        {
+          path: "Learners/:id",
+          element:  <LearnerProfile/>
+        },
+        {
+          path: "QuizList",
           element:  <AdminQuizList/>
+        },
+        {
+          path: "QuizList/:id",
+          element:  <InstructorQuizList/>
         },
         {
           path: "feedback/message",

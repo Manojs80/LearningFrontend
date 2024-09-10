@@ -53,7 +53,7 @@ useEffect(() => {
     } catch (error) {
       
       console.error(error);
-      toast.error('An error occurred while fetching assignments.');
+      if(instructorId){ toast.error('An error occurred while fetching assignments.');}
     } finally {
       setLoading(false);
     }

@@ -43,13 +43,15 @@ import { DetailsAdmin } from '../api/Routing'
            } `}
          >
            <div className="p-4">
-             <h2 className="text-2xl font-bold mb-4">{Admin.name}</h2>
+             <h2 className="text-2xl font-bold mb-4 uppercase">{Admin.name}</h2>
              <ul  className="font-bold mb-4">
              <li className="mb-2"><Link to={`${Admin._id}`} className="text-blue-600 hover:underline">Profile</Link></li>
              <li className="mb-2"><Link to="home" className="text-blue-600 hover:underline">Home</Link></li>
-             <li className="mb-2"><Link to="Course/66c431f1c8addb7d24853198" className="text-blue-600 hover:underline">Courses</Link></li>
-             <li className="mb-2"><Link to="AssignmentList" className="text-blue-600 hover:underline">Assignments</Link></li>
-             <li className="mb-2"><Link to="Quizs" className="text-blue-600 hover:underline">Quizs</Link></li>
+             <li className="mb-2"><Link to="Courses" className="text-blue-600 hover:underline">Courses</Link></li>
+             <li className="mb-2"><Link to="Instructors" className="text-blue-600 hover:underline">Instructors</Link></li>
+             <li className="mb-2"><Link to="Learners" className="text-blue-600 hover:underline">Learners</Link></li>
+             <li className="mb-2"><Link to="Assignments" className="text-blue-600 hover:underline">Assignments</Link></li>
+             <li className="mb-2"><Link to="QuizList" className="text-blue-600 hover:underline">Quiz List</Link></li>
              <li className="mb-2"><Link to="feedback/message" className="text-blue-600 hover:underline">Feedback/Message</Link></li>
              </ul>
            </div>
@@ -57,7 +59,7 @@ import { DetailsAdmin } from '../api/Routing'
          <main className={`flex-1 p-4 transition-all min-h-96 duration-300 ${
          isSidebarOpen ? 'ml-60' : 'ml-0'
        }`} style={{ width: `calc(100% - ${isSidebarOpen ? '240px' : '0px'})` }}>
-           <header className="flex  bg-blue-600 text-white ">
+           <header className="flex justify-between items-center  bg-blue-600 text-white  ">
               {/* Sidebar Toggle Button */}
             <button onClick={toggleSidebar}  className="flex items-center p-2">
                 {isSidebarOpen ? (
@@ -66,7 +68,8 @@ import { DetailsAdmin } from '../api/Routing'
                     <ArrowRightFromLine size={28} color="#08e24a" strokeWidth={3} />     
                   )}
          </button>
-             <h1 className="text-2xl font-bold">Course Name</h1>
+         <h1 className="text-2xl font-bold uppercase">{Admin.name}</h1>
+         <h6 className="text-sm font-semibold p-1">Id : {Admin._id}</h6>
            </header>
            <div className=" p-4 border-2 border-cyan-400 h-auto ">
            <Outlet/>
@@ -78,5 +81,8 @@ import { DetailsAdmin } from '../api/Routing'
    )
  }
  
- 
+ /*
+<h1 className="text-2xl font-bold uppercase">{Admin.name}</h1>
+          <h6 className="text-sm font-semibold p-1">Id : {Admin._id}</h6>
+ */
  

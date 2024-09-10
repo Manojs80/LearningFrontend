@@ -145,6 +145,20 @@ export const CreateLearner = async (formData)=> {
     throw error  
   }
 }
+// list learners
+export const LearnerList = async ()=> {
+  console.log("Get instructor List frontapi",`${apiUrl}/v1/user/userlist`);
+  try {
+      const response = await axios({
+          method: 'get',
+          url: `${apiUrl}/v1/user/userlist`,
+          
+        });
+      return  response.data
+  } catch (error) {
+    throw error  
+  }
+}
 
 //update learner
 export const UpdateLearner = async (id,formData)=> {

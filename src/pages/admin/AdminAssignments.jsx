@@ -2,14 +2,11 @@
 import React from 'react'
 import { QuizAssignment } from './QuizAssignment'
 
-
-
-
-export const AdminQuizList = () => {
+export const AdminAssignments = () => {
   return (
     <div>
         <h1 className=" my-6 text-center text-2xl font-bold text-green-500" >
-        Quiz List
+        Assignment List
         </h1> 
         
         <div>
@@ -22,15 +19,11 @@ export const AdminQuizList = () => {
 
 
 
-
-
-
 // import React, { useState, useEffect } from 'react';
-// import { CourseList} from '../../api/Routing';
+// import { CourseList, DeleteCourse } from '../../api/Routing';
 // import { Link } from 'react-router-dom';
 
-// export const AdminQuizList = () => {
-    
+// export const AdminAssignments = () => {
     
 //         const [courses, setCourses] = useState([]);
       
@@ -92,3 +85,6 @@ export const AdminQuizList = () => {
 //           </div>
 //         );
 //       };
+
+
+  

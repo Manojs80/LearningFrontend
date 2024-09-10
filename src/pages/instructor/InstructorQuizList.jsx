@@ -59,7 +59,7 @@ export const InstructorQuizList = () => {
     } catch (error) {
       
       console.error(error);
-      toast.error('An error occurred while fetching assignments.');
+      if(instructorId){ toast.error('An error occurred while fetching assignments.');}
     } finally {
         setLoading(false);
       }
@@ -81,7 +81,9 @@ export const InstructorQuizList = () => {
  
   <div className="p-4">
       <h1 className=" mb-6 text-center text-2xl font-bold text-green-500" >Instructor Quiz</h1>
+       
       <h2 className="text-xl font-semibold text-blue-500">Courses</h2>
+      
      {Course.map((row,index) => (
         <div className="flex flex-col p-4 mx-12">
       <button onClick={() => handleCourse(row)} className="bg-pink-500 text-white px-4 py-2  rounded hover:bg-blue-600">{index+1} : {row}</button>
@@ -91,7 +93,7 @@ export const InstructorQuizList = () => {
       Selected:
         <h1 className="text-zinc-950 text-2xl">{selectedCourseId}</h1>
         </div>
-        
+
         {QuizList.length === 0 ? (
         <div className="text-center my-6">
           <h1 className="text-zinc-950 bg-white m-1 text-2xl">No Quiz found for the selected course.</h1> 
@@ -160,6 +162,7 @@ export const InstructorQuizList = () => {
 }
 
 /*
+if(instructorId){ toast.error('An error occurred while fetching assignments.');}
 <div className="mt-2 flex flex-col md:flex-row md:justify-between md:space-x-4">
             <div className="dark:text-white mb-2 md:mb-0">
             <div className="text-lg font-semibold dark:text-white mb-2 md:mb-0">
