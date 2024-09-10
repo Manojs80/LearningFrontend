@@ -11,7 +11,7 @@ const roleColors = {
 export const SignUpPage = () => {
   const [role, setRole] = useState('learner');
   const { register, handleSubmit, formState: { errors }, watch } = useForm();
-
+  
   const onSubmit = async (data) => {
     // Combine form data with role
      const form = { ...data, role };
@@ -132,6 +132,7 @@ export const SignUpPage = () => {
             />
             {errors.confirmPassword && <p className="text-red-500 text-sm">{errors.confirmPassword.message}</p>}
           </div>
+
           </div>
          
           <div className="flex items-center justify-center">

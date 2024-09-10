@@ -34,6 +34,7 @@ export const LearnerClassroom = () => {
 
   return (
  <div>
+  <h1 className=" mb-6 text-center text-2xl font-bold text-green-500" >Learners ClassRoom</h1>
    <div className="relative w-full pb-[56.25%]">
    {/* Video Player */}
    <iframe

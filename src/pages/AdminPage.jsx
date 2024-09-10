@@ -1,15 +1,39 @@
-  
-    
- import React, { useState } from 'react'
+     
+ import React, { useEffect, useState } from 'react'
  import { Footer } from '../components/Footer'
- import { Link, Outlet } from 'react-router-dom'
+ import { Link, Outlet, useParams } from 'react-router-dom'
  import { LearnerHeader } from '../components/LearnerHeader'
  import { ArrowLeftFromLine, ArrowRightFromLine } from 'lucide-react'
+import { DetailsAdmin } from '../api/Routing'
  
  export const AdminPage = () => {
    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
- 
      const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+      const { id } = useParams(); 
+       const [Admin, setAdmin] = useState(null);
+     const [loading, setLoading] = useState(true);
+     const [error, setError] = useState(null);
+   
+     useEffect(() => {
+       const loadAdmin = async () => {
+         try {             
+           let response = await DetailsAdmin(id);
+           console.log("admin response.data",response.data);
+           setAdmin(response.data);
+         } catch (error) {
+           setError(error);
+           console.log(error); 
+         } finally {
+           setLoading(false);
+         }
+       };
+   
+       loadAdmin(); // Call the async function to load data
+     }, []);  
+     
+     if (loading) return <div>Loading...</div>;
+     if (error) return <div>Error loading Admin details. Please try again later.</div>;
+     if (!Admin) return <div>No Admin found.</div>;
    return (
      <div>
        <LearnerHeader/>
@@ -19,9 +43,9 @@
            } `}
          >
            <div className="p-4">
-             <h2 className="text-2xl font-bold mb-4">Admin.Name</h2>
+             <h2 className="text-2xl font-bold mb-4">{Admin.name}</h2>
              <ul  className="font-bold mb-4">
-             <li className="mb-2"><Link to="66c2ddec1943acbb8bdd9cc1" className="text-blue-600 hover:underline">Profile</Link></li>
+             <li className="mb-2"><Link to={`${Admin._id}`} className="text-blue-600 hover:underline">Profile</Link></li>
              <li className="mb-2"><Link to="home" className="text-blue-600 hover:underline">Home</Link></li>
              <li className="mb-2"><Link to="Course/66c431f1c8addb7d24853198" className="text-blue-600 hover:underline">Courses</Link></li>
              <li className="mb-2"><Link to="AssignmentList" className="text-blue-600 hover:underline">Assignments</Link></li>

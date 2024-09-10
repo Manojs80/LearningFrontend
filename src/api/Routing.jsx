@@ -48,6 +48,20 @@ export const DetailsCourse = async (id)=> {
     throw error  
   }
 }
+//CourseListinstructor
+export const CourseListinstructor = async (id)=> {
+  console.log("axios c detail",id);
+  console.log(`${apiUrl}/v1/course/courseList/${id}`);
+  try {
+      const response = await axios({
+          method: 'get',
+          url: `${apiUrl}/v1/course/courseList/${id}`, 
+        });
+      return  response.data
+  } catch (error) {
+    throw error  
+  }
+}
 //update course
 export const UpdateCourse = async (id,formData)=> {
   console.log("axios course update",id);
@@ -58,7 +72,7 @@ export const UpdateCourse = async (id,formData)=> {
           url: `${apiUrl}/v1/course/update/${id}`,
           data: formData,  
           headers: {
-            'Content-Type': 'multipart/form-data', // Set headers if you are sending form data
+            'Content-Type': 'multipart/form-data', 
           }, 
         });
         console.log("response",response)
@@ -344,12 +358,12 @@ export const CreateQuiz = async (formData)=> {
   }
 }
 //GetQuizList
-export const QuizListGet = async ()=> {
-  console.log("GetQuizList frontapi",`${apiUrl}/v1/quiz/quizList`);
+export const QuizListGet = async (id)=> {
+  console.log("GetQuizList frontapi",`${apiUrl}/v1/quiz/quizList/${id}`);
   try {
       const response = await axios({
           method: 'get',
-          url: `${apiUrl}/v1/quiz/quizList`,
+          url: `${apiUrl}/v1/quiz/quizList/${id}`,
           
         });
       return  response.data
@@ -371,6 +385,24 @@ export const GetQuiz = async (id)=> {
     throw error  
   }
 }
+//SubmitQuiz
+export const SubmitQuiz = async (payload) => {
+  console.log("axios quiz SubmitQuiz", payload);
+  try {
+    const response = await axios({
+      method: 'post',
+      url: `${apiUrl}/v1/quiz/submit`,
+      data: payload, 
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error submitting quiz:', error);
+    throw error;
+  }
+};
 //quizupdate
 export const UpdateQuiz = async (id,formData)=> {
   console.log("axios Learner update",id);
@@ -518,6 +550,40 @@ export const Adminlogin = async (data)=> {
         throw error  
       }
   }
+  //admin deatails
+  export const DetailsAdmin = async (id)=> {
+    console.log("axios Admin detail",id);
+    console.log(`${apiUrl}/v1/admin/profile/${id}`);
+    try {
+        const response = await axios({
+            method: 'get',
+            url: `${apiUrl}/v1/admin/profile/${id}`, 
+          });
+          console.log("axios Admin detail2");
+        return  response.data
+    } catch (error) {
+      throw error  
+    }
+  }
+  //update Admin
+export const UpdateAdmin = async (id,formData)=> {
+  console.log("axios Admin update frontend",id);
+  console.log(`${apiUrl}/v1/admin/update/${id}`);
+  try {
+      const response = await axios({
+          method: 'put',
+          url: `${apiUrl}/v1/admin/update/${id}`,
+          data: formData,  
+          headers: {
+            'Content-Type': 'multipart/form-data', // Set headers if you are sending form data
+          }, 
+        });
+        console.log("response",response)
+      return  response
+  } catch (error) {
+    throw error  
+  }
+}
 //Feedback
 //contactFeedback
 export const CreateFeedback = async (data)=> {

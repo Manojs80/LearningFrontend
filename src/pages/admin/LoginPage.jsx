@@ -30,7 +30,7 @@ export const LoginPage = () => {
       }
       
       // Debug: Check the loginbackend structure
-      console.log("loginbackend:", loginbackend);
+      console.log("loginbackend:", loginbackend.data);
       
       if (loginbackend && loginbackend.message) {
           toast.success(loginbackend.message);
@@ -41,12 +41,14 @@ export const LoginPage = () => {
       
       if (role === 'learner') {
         console.log("role(learner)",role);
-        navigate('/learner/Course/66c431f1c8addb7d24853198'); 
+        
+        navigate(`/learner/${loginbackend.data._id}`); 
      } else if (role === 'instructor') {
       console.log("role2",role);
-      navigate('/instructor/Course/66c431f1c8addb7d24853198');
+      navigate(`/instructor/${loginbackend.data._id}`);
      } else if (role === 'admin') {
-      navigate('/admin/home');
+      console.log("role user",`/admin/${loginbackend.data._id}`);
+      navigate(`/admin/${loginbackend.data._id}`);
      }
       
       

@@ -30,6 +30,13 @@ import { Quiz } from "../pages/course/Quiz";
 import { UserAuth } from "./UserAuth";
 import { InstructorAuth } from "./InstructorAuth";
 import { AdminAuth } from "./AdminAuth";
+import { LearnerProfileEdit } from "../pages/learner/LearnerProfileEdit";
+import { InstructorProfileEdit } from "../pages/instructor/InstructorProfileEdit";
+import { AdminProfileEdit } from "../pages/admin/AdminProfileEdit";
+import { LearnerQuiz } from "../pages/learner/LearnerQuiz";
+import { CourseCreateEdit } from "../pages/course/CourseCreateEdit";
+import { InstructorHome } from "../pages/instructor/InstructorHome";
+import { QuizAdd } from "../pages/course/QuizAdd";
 
 
 
@@ -46,6 +53,10 @@ export const router = createBrowserRouter([
         {
           path: '',
           element: <CourseCard/>
+        },
+        {
+          path: 'courseAdd',
+          element: <CourseCreateEdit/>
         },
         {
           path: "login",
@@ -72,10 +83,17 @@ export const router = createBrowserRouter([
       errorElement: <ErrorPage/>,
       children: [
          {
+          path: "profile/:id",
+          element: <LearnerProfile/>
+        },
+        {
           path: ":id",
           element: <LearnerProfile/>
         },
-        
+        {
+          path: ":id/edit",
+          element: <LearnerProfileEdit/>
+        },
         {
           path: "home",
           element: <CourseCard/>
@@ -85,12 +103,16 @@ export const router = createBrowserRouter([
           element: <LearnerClassroom/>
         },
         {
-          path: "AssignmentList/:id",
+          path: "course/AssignmentList/:id",
           element:  <LearnerAssignment/>
         },
         {
-          path: "quizs",
+          path: "course/quizs/:id",
           element:  <LearnerQuizList/>
+        },
+        {
+          path: "quiz/:id",
+          element:  <LearnerQuiz/>
         },
         {
           path: "feedback-message",
@@ -112,19 +134,35 @@ export const router = createBrowserRouter([
           element: <InstructorProfile/>
         },
         {
+          path: ":id/edit",
+          element: <InstructorProfileEdit/>
+        },
+        {
           path: "home",
-          element: <CourseCard/>
+          element: <InstructorHome/>
+        },
+        {
+          path: "home/CourseAdd",
+          element: <CourseCreateEdit/>
+        },
+        {
+          path: "CourseAdd/:id",
+          element: <CourseCreateEdit/>
         },
         {
           path: "course/:id",
-          element: <InstructorClassroom/>
+          element: <InstructorClassroom/> 
         },
         {
-          path: "AssignmentList/:id",
+          path: "CourseCard/:id",
+          element: <CourseDetail/>
+        },
+        {
+          path: "course/AssignmentList/:id",
           element:  <InstructorAssignment/>
         },
         {
-          path: "AssignmentList/66d552db2b47076d37d8ed64/assignmetAdd",
+          path: "assignmetAdd/:id",
           element:  <Assignment/>
         },
         {
@@ -132,23 +170,23 @@ export const router = createBrowserRouter([
           element:  <Assignment/>
         },
         {
-          path: "quizs",
+          path: "course/quizs/:id",
           element:  <InstructorQuizList/>
         },
         {
-          path: "quizs/quizAdd",
-          element: <Quiz/>
+          path: "quizAdd/:id",
+          element: <QuizAdd/>
         },
         {
-          path: "Quizs/:id",
-          element:  <Quiz/>
+          path: "quizChange/:id",
+          element: <Quiz/>
         },
         {
           path: "suggestion",
           element: <FeedbackMessage/>
         },
         {
-          path: "Course/66c431f1c8addb7d24853198/studyplan",
+          path: "Course/:id/studyplan",
           element: <SplanCreateEdit/>
         },
         {
@@ -169,6 +207,10 @@ export const router = createBrowserRouter([
          {
           path: ":id",
           element: <AdminProfile/>
+        },
+        {
+          path: ":id/edit",
+          element: <AdminProfileEdit/>
         },
         {
           path: "home",

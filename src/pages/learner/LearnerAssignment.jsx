@@ -49,6 +49,7 @@ export const LearnerAssignment = () => {
 
   return (
     <div className="p-4">
+      <h1 className=" mb-6 text-center text-2xl font-bold text-green-500" >Learners Assignment</h1>
       <ul className="space-y-4">
         {assignments.map((row, index) => {
           // Access corresponding data from `extractedData`

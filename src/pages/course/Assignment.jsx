@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
-import { CreateAssignment, GetAssignment, UpdateAssignment } from '../../api/Routing';
+import { CreateAssignment, DetailsCourse, GetAssignment, UpdateAssignment } from '../../api/Routing';
 
 export const Assignment = () => {
     const { control, register, handleSubmit, setValue, reset } = useForm({
@@ -16,22 +16,27 @@ export const Assignment = () => {
         name: 'activities'
       });
     
+      const [Course, setCourse] = useState([]);
       const navigate = useNavigate();
       const { id } = useParams();
       const isEdit = Boolean(id);
-    
+      console.log("Assignment",id);
       const loadData = async () => {
         if (!isEdit) return;
         try {
           const res = await GetAssignment(id);
-          const formData = res.data;
+          console.log("Assignment res",res);
+          const state = await DetailsCourse(id)
+          setCourse(state)
+          console.log("Assignment course",state.data);
+          const formData = res.data[0];
     
           if (formData.activities) {
             reset({ activities: [] });
             formData.activities.forEach(activity => append(activity));
           }
     
-          setValue('course', formData.course || '');
+          setValue('course', formData.course || id);
           setValue('instructor', formData.instructor || '');
         } catch (error) {
           console.log(error);
@@ -47,13 +52,16 @@ export const Assignment = () => {
         try {
           console.log("frontend",data);
           
-          if (isEdit) {
-            await UpdateAssignment(id,data);
+          if (Course.assignment) {
+           await UpdateAssignment(Course.assignment,data);
+           console.log("UpdateAssignment");
+           
           } else {
             await CreateAssignment(data);
+           console.log(" CreateAssignment");
           }
           toast.success('Success');
-          navigate('/Instructor/AssignmentList');
+          navigate('/Instructor/home');
         } catch (error) {
           toast.error(error.message || 'Error saving study plan');
         }
@@ -64,7 +72,7 @@ export const Assignment = () => {
     <div className="container mx-auto p-5">
       <div className="bg-white p-5 shadow-lg rounded-lg">
         <h3 className="text-3xl font-bold text-center mb-8">
-          {isEdit ? "Edit Assignment" : "Create Assignment"}
+        Assignment
         </h3>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-wrap justify-center gap-8 mb-8">
@@ -115,7 +123,7 @@ export const Assignment = () => {
                   <input
                     type="string"
                     {...field}
-                   
+                   placeholder="Due Date"
                     className="mr-2"
                   />
                 )}
