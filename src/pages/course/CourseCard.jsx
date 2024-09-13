@@ -37,7 +37,8 @@ export const CourseCard = () => {
           <div className="card-body">
             <h2 className="card-title text-blue-600">{row.title}</h2>
             <p class="h-15 ">{row.description}</p>
-            <div className="card-actions justify-end">
+            <div className="card-actions justify-between">
+            <h4 className="card-title text-green-600"> ₹ {row.fee}</h4>
                <button className="btn btn-primary" onClick={()=>{handleClick(row._id)}}>Know More</button>
             </div>
           </div>
@@ -52,7 +53,10 @@ export const CourseCard = () => {
 }
 
 
-{/*  <div className="card-body">
+{/* 
+  <h4 className="card-title text-green-600">{row.fee}</h4>
+  
+  <div className="card-body">
       <h2 className="card-title">Shoes!</h2>
       <p>If a dog chews shoes whose shoes does he choose?</p>
       <div className="card-actions justify-end">

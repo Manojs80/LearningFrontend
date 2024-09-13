@@ -39,6 +39,9 @@ import { InstructorHome } from "../pages/instructor/InstructorHome";
 import { QuizAdd } from "../pages/course/QuizAdd";
 import { AdminAssignments } from "../pages/admin/AdminAssignments";
 import { AdminQuizList } from "../pages/admin/AdminQuizList";
+import { PaymentSuccess } from "../pages/course/PaymentSuccess";
+import { PaymentCancel } from "../pages/course/PaymentCancel";
+
 
 
 
@@ -71,6 +74,14 @@ export const router = createBrowserRouter([
         {
           path: "CourseDetail/:id",
           element: <CourseDetail/>
+        },
+        {
+          path: "payment/success",
+          element: <PaymentSuccess/>
+        },
+        {
+          path: "payment/cancel",
+          element: <PaymentCancel/>
         },
         {
           path: "Contact",

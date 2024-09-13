@@ -41,6 +41,7 @@ export const LoginPage = () => {
       
       if (role === 'learner') {
         console.log("role(learner)",role);
+        console.log('Cookies:', document.cookie);
         
         navigate(`/learner/${loginbackend.data._id}`); 
      } else if (role === 'instructor') {
