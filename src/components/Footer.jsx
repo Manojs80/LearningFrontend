@@ -1,44 +1,34 @@
-import React from 'react'
+// src/components/Footer.jsx
+
+import React from 'react';
 
 export const Footer = () => {
   return (
-    
     <footer className="footer bg-neutral text-neutral-content p-10">
-  <nav>
-    <h6 className="footer-title">Services</h6>
-    <a className="link link-hover">Branding</a>
-    <a className="link link-hover">Design</a>
-    <a className="link link-hover">Marketing</a>
-    <a className="link link-hover">Advertisement</a>
-  </nav>
-  <nav>
-    <h6 className="footer-title">Company</h6>
-    <a className="link link-hover">About us</a>
-    <a className="link link-hover">Contact</a>
-    <a className="link link-hover">Jobs</a>
-    <a className="link link-hover">Press kit</a>
-  </nav>
-  <nav>
-    <h6 className="footer-title">Legal</h6>
-    <a className="link link-hover">Terms of use</a>
-    <a className="link link-hover">Privacy policy</a>
-    <a className="link link-hover">Cookie policy</a>
-  </nav>
-  <form>
-    <h6 className="footer-title">Newsletter</h6>
-    <fieldset className="form-control w-80">
-      <label className="label">
-        <span className="label-text">Enter your email address</span>
-      </label>
-      <div className="join">
-        <input
-          type="text"
-          placeholder="username@site.com"
-          className="input input-bordered join-item" />
-        <button className="btn btn-primary join-item">Subscribe</button>
-      </div>
-    </fieldset>
-  </form>
-</footer>
-  )
-}
+      <nav>
+        <h6 className="footer-title">Services</h6>
+        <a href="/footer/course-catalog" className="link link-hover">Course Catalog</a>
+        <a href="/footer/Interactive-learning-materials" className="link link-hover">Interactive Learning Materials</a>
+        <a href="/footer/assessment-and-certification" className="link link-hover">Assessment and Certification</a>
+        <a href="/footer/community-and-networking" className="link link-hover">Community and Networking</a>
+      </nav>
+      <nav>
+      <h6 className="footer-title">Company</h6>
+        <a href="/footer/our-team" className="link link-hover">Our Team</a>
+        <a href="/footer/careers" className="link link-hover">Careers</a>
+        <a href="/footer/partners" className="link link-hover">Partners</a>
+        <a href="/footer/media" className="link link-hover">Media</a>
+
+      </nav>
+      <nav>
+        <h6 className="footer-title">Legal</h6>
+        <a href="/footer/terms-of-use" className="link link-hover">Terms of use</a>
+        <a href="/footer/privacy-policy" className="link link-hover">Privacy policy</a>
+        <a href="/footer/cookie-policy" className="link link-hover">Cookie policy</a>
+      </nav>
+      
+    </footer>
+  );
+};
+
+

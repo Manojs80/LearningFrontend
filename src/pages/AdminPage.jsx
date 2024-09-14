@@ -5,6 +5,7 @@
  import { LearnerHeader } from '../components/LearnerHeader'
  import { ArrowLeftFromLine, ArrowRightFromLine } from 'lucide-react'
 import { DetailsAdmin } from '../api/Routing'
+import { LoadingPage } from '../LoadingPage'
  
  export const AdminPage = () => {
    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -31,7 +32,7 @@ import { DetailsAdmin } from '../api/Routing'
        loadAdmin(); // Call the async function to load data
      }, []);  
      
-     if (loading) return <div>Loading...</div>;
+     if (loading) return <div><LoadingPage/></div>;
      if (error) return <div>Error loading Admin details. Please try again later.</div>;
      if (!Admin) return <div>No Admin found.</div>;
    return (

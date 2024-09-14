@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { DeleteQuiz, DetailsInstructor, QuizListGet } from '../../api/Routing';
 import { Link, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { LoadingPage } from '../../LoadingPage';
 
 
 export const InstructorQuizList = () => {
@@ -73,7 +74,7 @@ export const InstructorQuizList = () => {
     };
   }, [selectedCourseId]);   
   
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div><LoadingPage/></div>;
   if (error) return <div>Error loading Studyplan details. Please try again later.</div>;
   if (!QuizList) return <div>No Studyplan found.</div>;
 

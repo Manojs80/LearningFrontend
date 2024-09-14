@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { GetStudyplan } from '../../api/Routing';
 import { useEffect } from 'react';
+import { LoadingPage } from '../../LoadingPage';
 
 
 export const LearnerClassroom = () => {
@@ -28,7 +29,7 @@ export const LearnerClassroom = () => {
     loadStudyplan(); // Call the async function to load data
   }, [id]);  
   
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div><LoadingPage/></div>;
   if (error) return <div>Error loading Studyplan details. Please try again later.</div>;
   if (!Studyplan) return <div>No Studyplan found.</div>;
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { DetailsInstructor } from '../../api/Routing';
+import { LoadingPage } from '../../LoadingPage';
 
 export const InstructorProfile = () => {
   const { id } = useParams();
@@ -27,7 +28,7 @@ export const InstructorProfile = () => {
     loadLearner();
   }, [id]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div><LoadingPage/></div>;
   if (error) return <div>Error loading course details. Please try again later.</div>;
   if (!Learner) return <div>No course found.</div>;
 

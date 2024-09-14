@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GetQuiz, SubmitQuiz } from '../../api/Routing'; // Ensure this is your API call function
+import { LoadingPage } from '../../LoadingPage';
 
 export const LearnerQuiz = () => {
   const { id } = useParams();
@@ -70,7 +71,7 @@ export const LearnerQuiz = () => {
     }
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div><LoadingPage/></div>;
   if (error) return <div>Error loading quiz. Please try again later.</div>;
   if (!quiz) return <div>No quiz found.</div>;
 

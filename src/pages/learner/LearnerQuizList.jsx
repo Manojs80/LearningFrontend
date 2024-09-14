@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { QuizListGet } from '../../api/Routing';
+import { LoadingPage } from '../../LoadingPage';
 
 export const LearnerQuizList = () => {
   const {id} = useParams();
@@ -41,7 +42,7 @@ export const LearnerQuizList = () => {
   }, [id]);
  
 
-   if (loading) return <div>Loading...</div>;
+   if (loading) return <div><LoadingPage/></div>;
    if (error) return <div>Error loading Quiz details. Please try again later.</div>;
    if (QuizList.length === 0) return <div>No Quiz found.</div>;
 

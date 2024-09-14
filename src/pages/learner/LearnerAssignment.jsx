@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AssignmentList } from '../../api/Routing';
 import { useParams } from 'react-router-dom';
+import { LoadingPage } from '../../LoadingPage';
 
 export const LearnerAssignment = () => {
   const { id } = useParams();
@@ -43,7 +44,7 @@ export const LearnerAssignment = () => {
     loadAssignment(); // Call the async function to load data
   }, [id]); // Include `id` in dependencies array
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div><LoadingPage/></div>;
   if (error) return <div>Error loading Assignment details. Please try again later.</div>;
   if (assignments.length === 0) return <div>No Assignment found.</div>;
 

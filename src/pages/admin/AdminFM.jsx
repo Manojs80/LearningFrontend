@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { DeleteFeedback, FeedbackList } from '../../api/Routing';
+import { LoadingPage } from '../../LoadingPage';
 
 export const AdminFM = () => {
   const [feedback, setFeedback] = useState([]);
@@ -34,7 +35,7 @@ export const AdminFM = () => {
     loadFeedback(); // Call the async function to load data
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div><LoadingPage/></div>;
   if (error) return <div>Error loading feedback. Please try again later.</div>;
   if (feedback.length === 0) return <div>No feedback found.</div>;
 

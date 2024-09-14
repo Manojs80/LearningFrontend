@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { AssignmentList, DetailsInstructor, GetAssignment } from '../../api/Routing';
 import { Link, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { LoadingPage } from '../../LoadingPage';
 
 
 export const InstructorAssignment = () => {
@@ -71,7 +72,7 @@ useEffect(() => {
 }, [selectedCourseId]); // Dependency array includes selectedCourseId
 
   
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div><LoadingPage/></div>;
    if (error) return <div>Error loading Assignment details. Please try again later.</div>;
   if (!Assignment) return <div>No Assignment found.</div>;
     

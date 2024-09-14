@@ -3,6 +3,7 @@ import { DetailsCourse } from '../../api/Routing';
 import { useParams } from 'react-router-dom';
 import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
+import { LoadingPage } from '../../LoadingPage';
  
 
 const apiUrl = import.meta.env.VITE_API_URL;
@@ -33,7 +34,7 @@ export const CourseDetail = () => {
     loadCourse(); // Call the async function to load data
   }, [id]); // Added `id` as a dependency to ensure `useEffect` runs when `id` changes
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div><LoadingPage/></div>;
   if (error) return <div>Error loading course details. Please try again later.</div>;
   if (!course) return <div>No course found.</div>;
 

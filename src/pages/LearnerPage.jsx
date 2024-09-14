@@ -4,6 +4,7 @@ import { Link, Outlet, useParams } from 'react-router-dom'
 import { LearnerHeader } from '../components/LearnerHeader'
 import { ArrowLeftFromLine, ArrowRightFromLine } from 'lucide-react'
 import { DetailsLearner } from '../api/Routing'
+import { LoadingPage } from '../LoadingPage'
 
 export const LearnerPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -31,7 +32,7 @@ export const LearnerPage = () => {
       loadLearner();
     }, []);// Call the async function to load data
     
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <div><LoadingPage/></div>;
     if (error) return <div>Error loading profile details. Please try again later.</div>;
     if (!Learner) return <div>No profile found.</div>;
     const firstCourseId = Learner.courses && Learner.courses.length > 0 ? Learner.courses[0] : null;

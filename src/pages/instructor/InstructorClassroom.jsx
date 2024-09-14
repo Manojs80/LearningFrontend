@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { DetailsInstructor, GetStudyplan } from '../../api/Routing';
 import { FileText, SquarePlay } from 'lucide-react';
+import { LoadingPage } from '../../LoadingPage';
 
 export const InstructorClassroom = () => {
   const { id } = useParams();
@@ -44,7 +45,7 @@ export const InstructorClassroom = () => {
     }
   }, [selectedCourseId]); // Dependency array includes selectedCourseId
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div><LoadingPage/></div>;
   if (error) return <div>Error loading Studyplan details. Please try again later.</div>;
   if (!Studyplan.length) return <div>No Studyplan found.</div>;
 

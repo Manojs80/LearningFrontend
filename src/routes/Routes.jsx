@@ -41,6 +41,7 @@ import { AdminAssignments } from "../pages/admin/AdminAssignments";
 import { AdminQuizList } from "../pages/admin/AdminQuizList";
 import { PaymentSuccess } from "../pages/course/PaymentSuccess";
 import { PaymentCancel } from "../pages/course/PaymentCancel";
+import { FooterPage } from "../pages/FooterPage";
 
 
 
@@ -86,6 +87,10 @@ export const router = createBrowserRouter([
         {
           path: "Contact",
           element: <Contact/>
+        },
+        {
+          path: 'footer/:sectionId',
+          element: <FooterPage/>
         },
        
       ]
