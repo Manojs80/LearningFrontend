@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { DetailsCourse } from '../../api/Routing';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
 import { LoadingPage } from '../../LoadingPage';
+
  
 
 const apiUrl = import.meta.env.VITE_API_URL;
@@ -15,7 +16,7 @@ export const CourseDetail = () => {
   const [course, setCourse] = useState(null); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const loadCourse = async () => {
       try {
@@ -38,8 +39,28 @@ export const CourseDetail = () => {
   if (error) return <div>Error loading course details. Please try again later.</div>;
   if (!course) return <div>No course found.</div>;
 
-  const makePayment = async () => {
+  const checkUser = async () => {
     try {
+        console.log("apiUrl",`${apiUrl}/v1/user/check-user`);
+        const response = await axios({
+            url: `${apiUrl}/v1/user/check-user`,
+            method: "GET",
+            withCredentials: true,
+        });
+
+        console.log("check user",response);
+        makePayment();
+        
+    } catch (error) {
+        navigate("/login");
+        console.log(error);
+    }
+};
+
+  const makePayment = async () => {
+    
+    try {
+    
       const stripe = await loadStripe(stripePublicKey);
 
       if (!stripe) {
@@ -93,7 +114,7 @@ export const CourseDetail = () => {
                 ))}
               </ul>
             </div>
-            <button onClick={makePayment} className="mt-6 btn btn-primary">
+            <button onClick={checkUser} className="mt-6 btn btn-primary">
               Enroll Now
             </button>
           </div>
