@@ -95,6 +95,7 @@ export const router = createBrowserRouter([
        
       ]
     },
+   
     {
       path: "/Learner/",
       element: <UserAuth><LearnerPage/></UserAuth>,
@@ -142,9 +143,10 @@ export const router = createBrowserRouter([
         },
       ]
     },
+   
     {
       path: "/Instructor/",
-      element:  <InstructorAuth><InstructorPage/></InstructorAuth>,
+      element: <InstructorAuth><InstructorPage/></InstructorAuth>,
       errorElement: <ErrorPage/>,
       children: [
          {
@@ -217,6 +219,7 @@ export const router = createBrowserRouter([
         },
       ]
     },
+   
     {
       path: "/Admin/",
       element:  <AdminAuth><AdminPage/></AdminAuth>,

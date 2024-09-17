@@ -4,7 +4,8 @@ import React from 'react';
 
 export const Footer = () => {
   return (
-    <footer className="footer bg-neutral text-neutral-content p-10">
+    <footer className="footer pl-20 bg-neutral text-neutral-content  pt-5 pb-3">
+      
       <nav>
         <h6 className="footer-title">Services</h6>
         <a href="/footer/course-catalog" className="link link-hover">Course Catalog</a>
@@ -20,8 +21,8 @@ export const Footer = () => {
         <a href="/footer/media" className="link link-hover">Media</a>
 
       </nav>
-      <nav>
-        <h6 className="footer-title">Legal</h6>
+      <nav className="mr-auto">
+        <h6 className="footer-title ">Legal</h6>
         <a href="/footer/terms-of-use" className="link link-hover">Terms of use</a>
         <a href="/footer/privacy-policy" className="link link-hover">Privacy policy</a>
         <a href="/footer/cookie-policy" className="link link-hover">Cookie policy</a>

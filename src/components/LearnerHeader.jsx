@@ -57,8 +57,8 @@ export const LearnerHeader = () => {
   };
 
   return (
-    <div className="navbar bg-base-100">
-      <div className="navbar-start">
+    <div className="navbar dark:bg-red-600">
+      <div className="navbar-start ">
         <div className="hidden md:block">
           <img
             src={Learner?.profilepic || 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp'}
@@ -73,7 +73,7 @@ export const LearnerHeader = () => {
 
       <div className="navbar-center">
         <div>
-          <h1 className="text-2xl font-extrabold md:text-4xl">LEARNING DASHBOARD</h1>
+          <h1 className="text-2xl  font-extrabold md:text-4xl">LEARNING DASHBOARD</h1>
         </div>
       </div>
 

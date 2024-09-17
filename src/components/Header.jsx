@@ -38,8 +38,8 @@ export const Header = () => {
         <li>
           <a>Courses</a>
           <ul className="p-2">
-          <li><Link to="/Learner/Course/66c431f1c8addb7d24853198">Learner</Link></li>
-          <li><Link to="/Instructor/Course/66c431f1c8addb7d24853198">Instructor</Link></li> 
+          <li><Link to="/Learner">Learner</Link></li>
+          <li><Link to="/Instructor">Instructor</Link></li> 
           <li><Link to="/Admin">Admin</Link></li> 
           </ul>
         </li>
@@ -59,8 +59,8 @@ export const Header = () => {
          >
           <summary>Courses</summary>
           <ul className="p-1">
-          <li><Link to="/Learner/Course/66c431f1c8addb7d24853198">Learner</Link></li>
-           <li><Link to="/Instructor/Course/66c431f1c8addb7d24853198">Instructor</Link></li>
+          <li><Link to="/Learner">Learner</Link></li>
+           <li><Link to="/Instructor">Instructor</Link></li>
            <li><Link to="/Admin">Admin</Link></li>   
           </ul>
         </details>

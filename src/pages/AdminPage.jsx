@@ -39,21 +39,21 @@ import { LoadingPage } from '../LoadingPage'
      <div>
        <LearnerHeader/>
        <aside
-           className={`fixed top-20 left-0 w-48 h-auto border-2 border-dashed border-cyan-400 transition-transform transform ${
+           className={`fixed top-30 mt-5 min-h-96 left-0 right-0 w-56 p-2 bg-violet-800 transition-transform transform ${
              isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
            } `}
          >
            <div className="p-4">
-             <h2 className="text-2xl font-bold mb-4 uppercase">{Admin.name}</h2>
-             <ul  className="font-bold mb-4">
-             <li className="mb-2"><Link to={`${Admin._id}`} className="text-blue-600 hover:underline">Profile</Link></li>
-             <li className="mb-2"><Link to="home" className="text-blue-600 hover:underline">Home</Link></li>
-             <li className="mb-2"><Link to="Courses" className="text-blue-600 hover:underline">Courses</Link></li>
-             <li className="mb-2"><Link to="Instructors" className="text-blue-600 hover:underline">Instructors</Link></li>
-             <li className="mb-2"><Link to="Learners" className="text-blue-600 hover:underline">Learners</Link></li>
-             <li className="mb-2"><Link to="Assignments" className="text-blue-600 hover:underline">Assignments</Link></li>
-             <li className="mb-2"><Link to="QuizList" className="text-blue-600 hover:underline">Quiz List</Link></li>
-             <li className="mb-2"><Link to="feedback/message" className="text-blue-600 hover:underline">Feedback/Message</Link></li>
+             <h2 className="text-2xl font-bold text-teal-300 mb-10  uppercase">{Admin.name}</h2>
+             <ul  className="font-bold text-white  mb-4">
+             <li className="mb-3"><Link to={`${Admin._id}`} className=" hover:underline">Profile</Link></li>
+             <li className="mb-3"><Link to="home" className=" hover:underline">Home</Link></li>
+             <li className="mb-3"><Link to="Courses" className=" hover:underline">Courses</Link></li>
+             <li className="mb-3"><Link to="Instructors" className=" hover:underline">Instructors</Link></li>
+             <li className="mb-3"><Link to="Learners" className=" hover:underline">Learners</Link></li>
+             <li className="mb-3"><Link to="Assignments" className=" hover:underline">Assignments</Link></li>
+             <li className="mb-3"><Link to="QuizList" className="hover:underline">Quiz List</Link></li>
+             <li className="mb-3"><Link to="feedback/message" className=" hover:underline">Feedback/Message</Link></li>
              </ul>
            </div>
          </aside> 
@@ -70,7 +70,7 @@ import { LoadingPage } from '../LoadingPage'
                   )}
          </button>
          <h1 className="text-2xl font-bold uppercase">{Admin.name}</h1>
-         <h6 className="text-sm font-semibold p-1">Id : {Admin._id}</h6>
+         <h6 className="text-sm font-semibold pe-5">Id : {Admin._id}</h6>
            </header>
            <div className=" p-4 border-2 border-cyan-400 h-auto ">
            <Outlet/>

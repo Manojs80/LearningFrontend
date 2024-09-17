@@ -40,26 +40,26 @@ export const LearnerPage = () => {
     <div>
       <LearnerHeader/>
       <aside
-          className={`fixed top-20 left-0 w-48 h-auto border-2 border-dashed border-cyan-400 transition-transform transform ${
+          className={`fixed top-30 mt-5 min-h-96 left-0 right-0 w-56 p-2  bg-violet-800  transition-transform transform ${
             isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
           } `}
         >
           <div className="p-4">
-            <h2 className="text-2xl font-bold mb-4 uppercase">{Learner.name}</h2>
-            <ul  className="font-bold mb-4">
-            <li className="mb-2"><Link to={`${Learner._id}`}  className="text-blue-600 hover:underline">Profile</Link></li>
-            <li className="mb-2"><Link to="home" className="text-blue-600 hover:underline">Home</Link></li>
+            <h2 className="text-2xl font-bold text-teal-300 mb-10 uppercase">{Learner.name}</h2>
+            <ul  className="font-bold text-white   mb-4">
+            <li className="mb-3"><Link to={`${Learner._id}`}  className=" hover:underline">Profile</Link></li>
+            <li className="mb-3"><Link to="home" className=" hover:underline">Home</Link></li>
             {firstCourseId && (
-              <li className="mb-2"><Link to={`Course/${firstCourseId}`} className="text-blue-600 hover:underline">Courses</Link></li>
+              <li className="mb-3"><Link to={`Course/${firstCourseId}`} className="  hover:underline">Courses</Link></li>
             )}
               {firstCourseId && (
-              <li className="mb-2"><Link to={`Course/AssignmentList/${firstCourseId}`} className="text-blue-600 hover:underline">Assignments</Link></li>
+              <li className="mb-3"><Link to={`Course/AssignmentList/${firstCourseId}`} className=" hover:underline">Assignments</Link></li>
             )} 
               {firstCourseId && (
-              <li className="mb-2"><Link to={`Course/Quizs/${firstCourseId}`} className="text-blue-600 hover:underline">Quizs</Link></li>
+              <li className="mb-3"><Link to={`Course/Quizs/${firstCourseId}`} className=" hover:underline">Quizs</Link></li>
             )}
            
-            <li className="mb-2"><Link to="feedback-message" className="text-blue-600 hover:underline">Feedback/Message</Link></li>             
+            <li className="mb-3"><Link to="feedback-message" className=" hover:underline">Feedback/Message</Link></li>             
             </ul>
           </div>
         </aside> 
@@ -76,7 +76,7 @@ export const LearnerPage = () => {
                  )}
         </button>
         <h1 className="text-2xl font-bold uppercase">{Learner.name}</h1>
-        <h6 className="text-sm font-semibold p-1">Id : {Learner._id}</h6>
+        <h6 className="text-sm font-semibold pe-5">Id : {Learner._id}</h6>
           </header>
           <div className=" p-4 border-2 border-cyan-400 h-auto ">
           <Outlet/>
@@ -87,10 +87,3 @@ export const LearnerPage = () => {
     </div>
   )
 }
-//"AssignmentList/66c2350e0914e4ea1199fc4a"
-//<li className="mb-2"><Link to="Quizs" className="text-blue-600 hover:underline">Quizs</Link></li>
-
-  /*
-   <h1 className="text-2xl font-bold uppercase">{Learner.name}</h1>
-          <h6 className="text-sm font-semibold p-1">Id : {Learner._id}</h6>
-  */        
