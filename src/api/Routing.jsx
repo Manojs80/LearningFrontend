@@ -181,13 +181,14 @@ export const UpdateLearner = async (id,formData)=> {
   }
 }
 //LearnerCourseAdd
-export const AddCourse = async (id)=> {
+export const AddCourse = async (id,LearnerId)=> {
   console.log("axios course add",id);
   console.log(`${apiUrl}/v1/user/courseAdd/${id}`);
   try {
       const response = await axios({
           method: 'put',
-          url: `${apiUrl}/v1/user/courseAdd/${id}`,         
+          url: `${apiUrl}/v1/user/courseAdd/${id}`,   
+          data: { LearnerId },      
         });
         console.log("response",response)
       return  response
