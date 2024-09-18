@@ -18,10 +18,10 @@ export const PaymentSuccess = () => {
         setPaymentDetails(response.data);
        
        // Uncomment to add course
-        if (response.data.CourseId) {
-          const id =response.data.CourseId ;
-          await AddCourse(id);
-        }
+        // if (response.data.CourseId) {
+        //   const id =response.data.CourseId ;
+        //   await AddCourse(id);
+        // }
 
       } catch (err) {
         setError('Failed to fetch payment details');
