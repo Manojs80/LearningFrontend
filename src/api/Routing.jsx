@@ -81,6 +81,7 @@ export const UpdateCourse = async (id,formData)=> {
     throw error  
   }
 }
+
 //delete course
 export const DeleteCourse = async (id)=> {
   console.log("Delete course frontapi",`${apiUrl}/v1/course/delete/${id}`);
@@ -172,6 +173,21 @@ export const UpdateLearner = async (id,formData)=> {
           headers: {
             'Content-Type': 'multipart/form-data', // Set headers if you are sending form data
           }, 
+        });
+        console.log("response",response)
+      return  response
+  } catch (error) {
+    throw error  
+  }
+}
+//LearnerCourseAdd
+export const AddCourse = async (id)=> {
+  console.log("axios course add",id);
+  console.log(`${apiUrl}/v1/user/courseAdd/${id}`);
+  try {
+      const response = await axios({
+          method: 'put',
+          url: `${apiUrl}/v1/user/courseAdd/${id}`,         
         });
         console.log("response",response)
       return  response

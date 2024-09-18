@@ -42,6 +42,7 @@ import { AdminQuizList } from "../pages/admin/AdminQuizList";
 import { PaymentSuccess } from "../pages/course/PaymentSuccess";
 import { PaymentCancel } from "../pages/course/PaymentCancel";
 import { FooterPage } from "../pages/FooterPage";
+import { PaymentLogin } from "../components/PaymentLogin";
 
 
 
@@ -63,6 +64,11 @@ export const router = createBrowserRouter([
         {
           path: 'courseAdd',
           element: <CourseCreateEdit/>
+        },
+        //Payment
+        {
+          path: 'Payment/:id',
+          element: <PaymentLogin/>
         },
         {
           path: "login",
