@@ -30,24 +30,14 @@ export const SignUpPage = () => {
       // Simulate form submission logic
       let response
       console.log(formData);
-      // Replace this with actual submission logic, e.g., API call
-      if (role === 'learner') {
-        response = await CreateLearner(formData);
-        toast.success('Form submitted successfully!');
-        navigate(`/learner/${response.data._id}`);
-      } else if (role === 'instructor') {
-        response = await CreateInstructor(formData);
-        toast.success('Form submitted successfully!');
-        console.log("signup response data",response.data);
-        navigate(`/instructor/${response.data._id}`);
-      }
-      // Notify success
-      // toast.success('Form submitted successfully!');
-      // console.log("signup response",response);
-      // console.log("signup response data",response.data);
-      // navigate(`/learner/${response.data._id}`);
-      // Reset the form after successful submission
       
+      if (role === 'learner') {
+        response = await CreateLearner(formData);  
+      } else if (role === 'instructor') {
+        response = await CreateInstructor(formData);   
+      }
+      toast.success('Form submitted successfully.. please.. login');  
+      navigate("/login");
     } catch (error) {
       // Notify error
       console.error('Error occurred:', error);
