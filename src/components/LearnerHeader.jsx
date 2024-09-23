@@ -44,11 +44,11 @@ export const LearnerHeader = () => {
 
   const handleClick = async () => {
     try {
-      await Logout();
+      const logres = await Logout();
       // Remove the token from cookies
-      document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      // document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
       toast.success("Logged out successfully");
-      console.log('Logged out successfully');
+      console.log('Logged out successfully',logres);
       navigate('/login');
     } catch (error) {
       console.error('Error during logout:', error);
