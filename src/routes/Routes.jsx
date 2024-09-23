@@ -65,7 +65,6 @@ export const router = createBrowserRouter([
           path: 'courseAdd',
           element: <CourseCreateEdit/>
         },
-        //Payment
         {
           path: 'Payment/:id',
           element: <PaymentLogin/>

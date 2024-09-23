@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { CreateInstructor, CreateLearner } from '../api/Routing';
+import { useNavigate } from 'react-router-dom';
 
 const roleColors = {
   learner: 'bg-emerald-500',
@@ -11,7 +12,8 @@ const roleColors = {
 export const SignUpPage = () => {
   const [role, setRole] = useState('learner');
   const { register, handleSubmit, formState: { errors }, watch } = useForm();
-  
+  const navigate = useNavigate();
+
   const onSubmit = async (data) => {
     // Combine form data with role
      const form = { ...data, role };
@@ -26,15 +28,24 @@ export const SignUpPage = () => {
     }
     try {
       // Simulate form submission logic
+      let response
       console.log(formData);
       // Replace this with actual submission logic, e.g., API call
       if (role === 'learner') {
-        await CreateLearner(formData);
+        response = await CreateLearner(formData);
+        toast.success('Form submitted successfully!');
+        navigate(`/learner/${response.data._id}`);
       } else if (role === 'instructor') {
-        await CreateInstructor(formData);
+        response = await CreateInstructor(formData);
+        toast.success('Form submitted successfully!');
+        console.log("signup response data",response.data);
+        navigate(`/instructor/${response.data._id}`);
       }
       // Notify success
-      toast.success('Form submitted successfully!');
+      // toast.success('Form submitted successfully!');
+      // console.log("signup response",response);
+      // console.log("signup response data",response.data);
+      // navigate(`/learner/${response.data._id}`);
       // Reset the form after successful submission
       
     } catch (error) {
