@@ -3,6 +3,7 @@ import { ThemeMode } from './ThemeMode';
 import { useNavigate, useParams } from 'react-router-dom';
 import { DetailsAdmin, DetailsInstructor, DetailsLearner, Logout } from '../api/Routing';
 import { toast } from 'react-toastify';
+import Cookies from 'js-cookie';
 
 export const LearnerHeader = () => {
   const { id } = useParams();
@@ -45,9 +46,14 @@ export const LearnerHeader = () => {
   const handleClick = async () => {
     try {
       const logres = await Logout();
-      // Remove the token from cookies
+      Cookies.remove('token', { path: '/' }); // Remove the cookie/
       // document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-      toast.success("Logged out successfully");
+      if (logres && logres.message) {
+        toast.success(logres.message);
+    } else {
+        toast.error('Unexpected response structure.');
+    }
+     // toast.success("Logged out successfully");
       console.log('Logged out successfully',logres);
       navigate('/login');
     } catch (error) {
