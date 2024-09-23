@@ -20,7 +20,7 @@ export const PaymentSuccess = () => {
        // Uncomment to add course
         if (response.data.CourseId) {
           const id =response.data.CourseId ;
-          const LearnerId = sessionStorage.getItem('LearnerId');
+          const LearnerId = sessionStorage.getItem('loginId');
           console.log("LearnerId storage data", LearnerId);
           await AddCourse(id ,LearnerId);
         }

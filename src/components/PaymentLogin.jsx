@@ -41,7 +41,7 @@ export const PaymentLogin = () => {
   if (loading) return <div><LoadingPage/></div>;
   if (error) return <div>Error loading course details. Please try again later.</div>;
   if (!course) return <div>No course found.</div>;
-
+  
 
   const onSubmit = async(data) => {
 
@@ -50,7 +50,7 @@ export const PaymentLogin = () => {
 
       // Debug: Check the loginbackend structure
         console.log("loginbackend:", loginbackend.data);
-        sessionStorage.setItem('LearnerId', loginbackend.data._id);
+        sessionStorage.setItem('loginId', loginbackend.data._id);
         console.log("LearnerId",loginbackend.data._id);
        toast.success(loginbackend.message);
    

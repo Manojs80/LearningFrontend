@@ -3,7 +3,8 @@ import { DetailsCourse } from '../../api/Routing';
 import {  useNavigate, useParams } from 'react-router-dom';
 
 import { LoadingPage } from '../../LoadingPage';
-
+import axios from "axios";
+import { loadStripe } from "@stripe/stripe-js";
  
 
 
@@ -15,6 +16,9 @@ export const CourseDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const apiUrl = import.meta.env.VITE_API_URL;
+  const stripePublicKey = import.meta.env.VITE_STRIPE_P_KEY;
+
   useEffect(() => {
     const loadCourse = async () => {
       try {
@@ -42,8 +46,32 @@ export const CourseDetail = () => {
   const makePayment = async () => {
     
     try {
-      navigate(`/Payment/${course._id}`);
+      const LearnerId = sessionStorage.getItem('loginId');
+      if (LearnerId) {
+        const stripe = await loadStripe(stripePublicKey);
+
+          if (!stripe) {
+            console.error("Stripe failed to initialize.");
+            return;
+          }
     
+        
+          const response = await axios.post(`${apiUrl}/v1/payment/create-checkout-session`, { course }, { withCredentials: true });
+          const { sessionId } = response.data;
+    
+          if (!sessionId) {
+            console.error("No session ID received.");
+            return;
+          }
+    
+          const result = await stripe.redirectToCheckout({ sessionId });
+    
+          if (result.error) {
+            console.error(result.error.message);
+          }
+      } else{
+      navigate(`/Payment/${course._id}`);
+      }
     } catch (error) {
       console.error("Payment process failed:", error);
     }
