@@ -128,6 +128,7 @@ export const DetailsLearner = async (id)=> {
   }
 }
 
+
 //create learner
 export const CreateLearner = async (formData)=> {
   console.log("axios Learner create");

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
+
 const apiUrl = import.meta.env.VITE_API_URL;
 
 export const UserAuth = ({ children }) => {
@@ -16,7 +17,9 @@ export const UserAuth = ({ children }) => {
                 withCredentials: true,
             });
 
-            console.log("check user",response);
+            console.log("check user",response.data);
+    
+
             
         } catch (error) {
             navigate("/login");

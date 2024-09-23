@@ -38,10 +38,11 @@ export const LoginPage = () => {
           toast.error('Unexpected response structure.');
       }
       
+      sessionStorage.setItem('loginId',loginbackend.data._id);
+    
       
       if (role === 'learner') {
         console.log("role(learner)",role);
-        console.log('Cookies:', document.cookie);
         
         navigate(`/learner/${loginbackend.data._id}`); 
      } else if (role === 'instructor') {
