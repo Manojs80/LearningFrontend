@@ -740,11 +740,11 @@ export const DeleteContact = async (id)=> {
 }
 //loguot
 export const Logout = async ()=> {
-  console.log("Logout frontapi",`${apiUrl}/v1/logout`);
+  console.log("Logout frontapi",`${apiUrl}/v1/user/logout`);
   try {
       const response = await axios({
           method: 'post',
-          url: `${apiUrl}/v1/logout`,
+          url: `${apiUrl}/v1/user/logout`,
           credentials: 'include',
         });
       return  response.data
