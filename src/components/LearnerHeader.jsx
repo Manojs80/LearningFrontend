@@ -45,16 +45,15 @@ export const LearnerHeader = () => {
 
   const handleClick = async () => {
     try {
-       const logres = await Logout();
-      Cookies.remove('token', { path: '/api' }); // Remove the cookie/
-       // document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      const logres = await Logout();
+      Cookies.remove('token', { path: '/api' }); 
+      
       if (logres && logres.message) {
         toast.success(logres.message);
-    } else {
+      } else {
         toast.error('Unexpected response structure.');
-    }
-     toast.success("Logged out successfully");
-     // console.log('Logged out successfully',logres);
+      }
+   
       navigate('/login');
     } catch (error) {
       console.error('Error during logout:', error);

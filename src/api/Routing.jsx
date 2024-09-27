@@ -740,12 +740,14 @@ export const DeleteContact = async (id)=> {
 }
 //loguot
 export const Logout = async ()=> {
-  console.log("Logout frontapi",`${apiUrl}/v1/user/logout`);
+  console.log("Logout frontapi",`${apiUrl}/v1/logout`);
   try {
+      const data = "unauthorise@dmail.com"
       const response = await axios({
           method: 'post',
-          url: `${apiUrl}/v1/user/logout`,
-          credentials: 'include',
+          url: `${apiUrl}/v1/logout`,
+          data, 
+          withCredentials:true,
         });
       return  response.data
   } catch (error) {
