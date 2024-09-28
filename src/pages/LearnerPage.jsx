@@ -8,7 +8,7 @@ import { LoadingPage } from '../LoadingPage'
 
 export const LearnerPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const { id } = useParams();
+ // const { id } = useParams();
     const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
     const [Learner, setLearner] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -17,7 +17,8 @@ export const LearnerPage = () => {
     useEffect(() => {
       const loadLearner = async () => {
         try {
-          const response = await DetailsLearner(id);
+          const LogId = sessionStorage.getItem('loginId');
+          const response = await DetailsLearner(LogId);
           setLearner(response.data);
           sessionStorage.setItem('sessionData', response.data._id);
           console.log("learner page",response.data.courses);

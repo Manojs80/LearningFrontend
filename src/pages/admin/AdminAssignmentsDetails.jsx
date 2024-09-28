@@ -1,12 +1,12 @@
 
 import React, { useEffect, useState } from 'react'
-import { AssignmentList, DetailsInstructor, GetAssignment } from '../../api/Routing';
+import { AssignmentList, GetAssignment } from '../../api/Routing';
 import { Link, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { LoadingPage } from '../../LoadingPage';
+// DetailsInstructor, 
 
-
-export const InstructorAssignment = () => {
+export const AdminAssignmentsDetails = () => {
      
   const { id } = useParams();
   const [Assignment, setAssignment] = useState([]);
@@ -16,9 +16,9 @@ export const InstructorAssignment = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   console.log("Loading assignment list...id1",selectedCourseId);
-  const handleClick = (courseId) => {
-    setSelectedCourseId(courseId); // Update selected course ID
-  };
+//   const handleClick = (courseId) => {
+//     setSelectedCourseId(courseId); // Update selected course ID
+//   };
 
  
 useEffect(() => {
@@ -36,12 +36,12 @@ useEffect(() => {
           setCi(response.data[0]);
           console.log("loadAssignment setCi", response.data[0]);
 
-          const instructorId = sessionStorage.getItem('InstructorId');
-          console.log("Instructor storage data", instructorId);
+        //   const instructorId = sessionStorage.getItem('InstructorId');
+        //   console.log("Instructor storage data", instructorId);
 
-          const instructor = await DetailsInstructor(instructorId);
-          setCourse(instructor.data.courses);
-          console.log("load courses", instructor.data.courses);
+        //   const instructor = await DetailsInstructor(instructorId);
+        //   setCourse(instructor.data.courses);
+        //   console.log("load courses", instructor.data.courses);
         } else {
           // Handle case where there are no assignments
           setAssignment([]); // Clear previous assignments
@@ -54,7 +54,7 @@ useEffect(() => {
     } catch (error) {
       
       console.error(error);
-      if(instructorId){ toast.error('An error occurred while fetching assignments.');}
+    //   if(instructorId){ toast.error('An error occurred while fetching assignments.');}
     } finally {
       setLoading(false);
     }
@@ -79,13 +79,13 @@ useEffect(() => {
 
   return (
   <div className="p-4">
-     <h1 className=" mb-6 text-center text-2xl font-bold text-green-500" >Instructor Assignment</h1>
+    
      <h2 className="text-xl font-semibold text-blue-500">Courses</h2>
-     {Course.map((task,index) => (
+     {/* {Course.map((task,index) => (
         <div className="flex flex-col p-4 mx-12">
       <button onClick={() => handleClick(task)} className="bg-pink-500 text-white px-4 py-2  rounded hover:bg-blue-600">{index+1} : {task}</button>
       </div>
-       ))}
+       ))} */}
       <div className="bg-green-800 text-center text-blue font-bold my-5 p-2">
       Selected:
         <h1 className="text-zinc-950 text-2xl">{selectedCourseId}</h1>
@@ -141,6 +141,3 @@ useEffect(() => {
   </div>
   )
 }
-
-
-

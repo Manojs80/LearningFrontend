@@ -34,7 +34,7 @@ export const QuizAssignment = () => {
                   <th className="border-b p-4 text-left text-pink-700">No</th>
                   <th className="border-b p-4 text-left text-pink-700">Course ID</th>
                   <th className="border-b p-4 text-left text-pink-700">Course</th>
-                  <th className="border-b p-4 text-left text-pink-700">Assignment</th>
+                  <th className="border-b p-4 text-left text-pink-700">Action</th>
                 </tr>
               </thead>
               <tbody>

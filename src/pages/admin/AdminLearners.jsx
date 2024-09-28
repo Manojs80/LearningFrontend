@@ -40,8 +40,8 @@ export const AdminLearners = () => {
         <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
           <thead className="bg-gray-200 ">
             <tr>
-              <th className="border-b p-4 text-left text-pink-700">Image</th>
               <th className="border-b p-4 text-left text-pink-700">No</th>
+              <th className="border-b p-4 text-left text-pink-700">Image</th>
               <th className="border-b p-4 text-left text-pink-700">ID</th>
               <th className="border-b p-4 text-left text-pink-700">Name</th>
               <th className="border-b p-4 text-left text-pink-700">Actions</th>

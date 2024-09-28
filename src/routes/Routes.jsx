@@ -43,6 +43,7 @@ import { PaymentSuccess } from "../pages/course/PaymentSuccess";
 import { PaymentCancel } from "../pages/course/PaymentCancel";
 import { FooterPage } from "../pages/FooterPage";
 import { PaymentLogin } from "../components/PaymentLogin";
+import { AdminAssignmentsDetails } from "../pages/admin/AdminAssignmentsDetails";
 
 
 
@@ -257,7 +258,11 @@ export const router = createBrowserRouter([
         },
         {
           path: "Instructors/:id",
-          element:  <InstructorQuizList/>
+          element:  <InstructorProfile/>
+        },
+        {
+          path: "Instructors/:id/edit",
+          element: <InstructorProfileEdit/>
         },
         {
           path: "Assignments",
@@ -265,7 +270,7 @@ export const router = createBrowserRouter([
         },
         {
           path: "Assignments/:id",
-          element:  <InstructorAssignment/>
+          element:  <AdminAssignmentsDetails/>
         },
         {
           path: "Learners",
@@ -274,6 +279,10 @@ export const router = createBrowserRouter([
         {
           path: "Learners/:id",
           element:  <LearnerProfile/>
+        },
+        {
+          path: "Learners/:id/edit",
+          element: <LearnerProfileEdit/>
         },
         {
           path: "QuizList",

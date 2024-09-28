@@ -17,8 +17,9 @@ import { LoadingPage } from '../LoadingPage'
    
      useEffect(() => {
        const loadAdmin = async () => {
-         try {             
-           let response = await DetailsAdmin(id);
+         try {      
+          const LogId = sessionStorage.getItem('loginId');       
+           let response = await DetailsAdmin(id || LogId);
            console.log("admin response.data",response.data);
            setAdmin(response.data);
          } catch (error) {

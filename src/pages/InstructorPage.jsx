@@ -10,7 +10,7 @@ export const InstructorPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
     const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
-    const { id } = useParams(); 
+    // const { id } = useParams(); 
   const [Instructor, setInstructor] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -18,7 +18,8 @@ export const InstructorPage = () => {
   useEffect(() => {
     const loadInstructor = async () => {
       try {
-        let response = await DetailsInstructor(id);
+        const LogId = sessionStorage.getItem('loginId'); 
+        let response = await DetailsInstructor(LogId);
         setInstructor(response.data);
          sessionStorage.setItem('InstructorId', response.data._id);
          console.log("Instructor Id page",response.data._id);
