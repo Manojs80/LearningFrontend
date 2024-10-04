@@ -181,6 +181,27 @@ export const UpdateLearner = async (id,formData)=> {
     throw error  
   }
 }
+// MoveCourse
+export const MoveCourse = async (id,newCourses)=> {
+  console.log("axios Learner MoveCourse",id);
+  console.log(`${apiUrl}/v1/user/MoveCourse/${id}`);
+
+  try {
+      const response = await axios({
+          method: 'put',
+          url: `${apiUrl}/v1/user/MoveCourse/${id}`,
+          headers: {
+                  'Content-Type': 'application/json',
+                },
+                data: { newOrder: newCourses },
+              });
+       
+        console.log("response",response)
+      return  response
+  } catch (error) {
+    throw error  
+  }
+}
 //LearnerCourseAdd
 export const AddCourse = async (id,LearnerId)=> {
   console.log("axios course add",id);

@@ -93,7 +93,11 @@ export const CourseDetail = () => {
           <div className="lg:w-2/3 p-6 flex flex-col justify-between">
             <div>
               <h1 className="text-3xl font-semibold text-lime-500 mb-2">{course.title}</h1>
-              <p className="text-orange-400 mb-4">Instructor: {course.instructor}</p>
+              <p className="  text-pink-400 mb-2">CourseId: {course._id}</p>
+              {course.instructor?.name && (<p className="text-xl text-orange-400 font-semibold ">
+                Instructor: {course.instructor.name.toUpperCase()}  </p>)}
+              {course.instructor?._id && (<p className="text-orange-400 mb-4">
+                Instructor-Id: {course.instructor._id}</p>)}
               <p className="text-white mb-6">{course.description}</p>
             </div>
             <div>

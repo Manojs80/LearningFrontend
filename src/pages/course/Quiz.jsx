@@ -21,7 +21,7 @@ export const Quiz = () => {
     name: 'questions'
   });
 
-  const { id } = useParams();
+  const { id,courseId } = useParams();
   
   const navigate = useNavigate();
   const loadData = async () => {
@@ -61,7 +61,7 @@ export const Quiz = () => {
       console.log("frontend",data);        
         await UpdateQuiz(id,data);   
       toast.success('Success');
-      navigate('/Instructor/home');
+      navigate(`/instructor/Course/Quizs/${courseId}`)
 
     } catch (error) {
       toast.error(error.message || 'Error saving study plan');

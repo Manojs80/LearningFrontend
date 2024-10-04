@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
@@ -8,7 +8,7 @@ import { CreateStudyplan, GetStudyplan, UpdateStudyplan } from '../../api/Routin
 export const SplanCreateEdit = () => {
   const { control, register, handleSubmit, setValue, reset } = useForm({
     defaultValues: {
-      activities: [{ task: '', taskDescription: '', completed: false }]
+      activities: [{ task: '', taskDescription: '' }]
     }
   });
 
@@ -18,21 +18,30 @@ export const SplanCreateEdit = () => {
   });
 
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id, courseId } = useParams();
   const isEdit = Boolean(id);
+  const [StudyplanId, setStudyplanId] = useState([]);
 
   const loadData = async () => {
-    if (!isEdit) return;
+    if (!isEdit){
+      setValue('courseId', courseId || '');
+      const InstructorId = sessionStorage.getItem('InstructorId');
+      setValue('instructor',InstructorId || '');
+      return;
+    }
+     
     try {
       const res = await GetStudyplan(id);
       const formData = res.data;
-
+      setStudyplanId(res.data._id)
+      console.log("GetStudyplan",res.data);
+      
       if (formData.activities) {
         reset({ activities: [] });
         formData.activities.forEach(activity => append(activity));
       }
 
-      setValue('course', formData.course || '');
+      setValue('courseId', formData.courseId || '');
       setValue('instructor', formData.instructor || '');
     } catch (error) {
       console.log(error);
@@ -47,12 +56,12 @@ export const SplanCreateEdit = () => {
   const onSubmit = async (data) => {
     try {
       if (isEdit) {
-        await UpdateStudyplan(id, data);
+        await UpdateStudyplan(StudyplanId, data);
       } else {
         await CreateStudyplan(data);
       }
       toast.success('Success');
-      navigate('/Instructor/Home');
+      navigate(`/Instructor/Course/${courseId}`);
     } catch (error) {
       toast.error(error.message || 'Error saving study plan');
     }
@@ -69,8 +78,8 @@ export const SplanCreateEdit = () => {
             <div className="flex flex-wrap justify-center gap-8 mb-8">
               <div className="flex gap-6">
                 <div>
-                  <label className="block text-red-500 font-medium mb-1">Course</label>
-                  <input type="text" {...register("course")} className="bg-white border border-gray-300 rounded p-2" />
+                  <label className="block text-red-500 font-medium mb-1">Course Id</label>
+                  <input type="text" {...register("courseId")} className="bg-white border border-gray-300 rounded p-2" />
                 </div>
 
                 <div>
@@ -88,9 +97,9 @@ export const SplanCreateEdit = () => {
                   control={control}
                   render={({ field }) => (
                     <input
-                      type="text"  // Changed to text to match the data type
+                      type="number"  // Changed to text to match the data type
                       {...field}
-                      placeholder="Task"
+                      placeholder="Task (1,2,..)"
                       className="border p-2"
                     />
                   )}
@@ -106,17 +115,7 @@ export const SplanCreateEdit = () => {
                     />
                   )}
                 />
-                <Controller
-                  name={`activities[${index}].completed`}
-                  control={control}
-                  render={({ field }) => (
-                    <input
-                      type="checkbox"
-                      {...field}
-                      className="mr-2"
-                    />
-                  )}
-                />
+                
                 <button
                   type="button"
                   onClick={() => remove(index)}

@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { CreateQuiz } from '../../api/Routing';
 
 export const QuizAdd = () => {
   // Access course ID from URL parameters
   const { id } = useParams();
- 
+  const navigate = useNavigate();
   console.log("courseId",id);
   const  courseId  = id;
 
@@ -39,6 +39,8 @@ export const QuizAdd = () => {
   useEffect(() => {
     if (courseId) {
       setValue('course', courseId);
+      const InstructorId = sessionStorage.getItem('InstructorId');
+      setValue('instructor',InstructorId || '');
     }
   }, [courseId, setValue]);
 
@@ -56,7 +58,7 @@ export const QuizAdd = () => {
       await CreateQuiz(data);
       console.log(" Create quiz ",data);
       toast.success('Success');
-      navigate('/Instructor/home');
+      navigate(`/instructor/Course/Quizs/${courseId}`);
     } catch (error) {
       toast.error(error.message || 'Error saving quiz');
     }

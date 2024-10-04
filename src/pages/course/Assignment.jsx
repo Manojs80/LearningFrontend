@@ -18,15 +18,21 @@ export const Assignment = () => {
     
       const [Course, setCourse] = useState([]);
       const navigate = useNavigate();
-      const { id } = useParams();
+      const { id ,courseId} = useParams();
       const isEdit = Boolean(id);
       console.log("Assignment",id);
+      console.log("Assignment courseId",courseId);
       const loadData = async () => {
-        if (!isEdit) return;
+        if (isEdit){
+          setValue('course', id || '');
+          const InstructorId = sessionStorage.getItem('InstructorId');
+          setValue('instructor',InstructorId || '');
+          return;
+        }
         try {
-          const res = await GetAssignment(id);
+          const res = await GetAssignment(courseId);
           console.log("Assignment res",res);
-          const state = await DetailsCourse(id)
+          const state = await DetailsCourse(courseId)
           setCourse(state)
           console.log("Assignment course",state.data);
           const formData = res.data[0];
@@ -52,16 +58,18 @@ export const Assignment = () => {
         try {
           console.log("frontend",data);
           
-          if (Course.assignment) {
-           await UpdateAssignment(Course.assignment,data);
-           console.log("UpdateAssignment");
+          if (courseId) {
+           await UpdateAssignment(courseId,data);
+           console.log("UpdateAssignment",courseId);
+           navigate(`/Instructor/Course/AssignmentList/${courseId}`);
            
           } else {
             await CreateAssignment(data);
            console.log(" CreateAssignment");
+           navigate(`/Instructor/Course/AssignmentList/${id}`);
           }
           toast.success('Success');
-          navigate('/Instructor/home');
+          
         } catch (error) {
           toast.error(error.message || 'Error saving study plan');
         }
@@ -123,7 +131,7 @@ export const Assignment = () => {
                   <input
                     type="string"
                     {...field}
-                   placeholder="Due Date"
+                   placeholder="Due Date:MM/DD/YY"
                     className="mr-2"
                   />
                 )}

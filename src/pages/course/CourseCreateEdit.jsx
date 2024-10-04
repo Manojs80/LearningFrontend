@@ -34,6 +34,7 @@ export const CourseCreateEdit = () => {
       setValue('_id', formData._id || '');
       setValue('title', formData.title || '');
       setValue('description', formData.description || '');
+      setValue('fee', formData.fee || '');
       setValue('duration', formData.duration || '');
       setValue('instructor', formData.instructor || '');
     } catch (error) {
@@ -140,7 +141,7 @@ export const CourseCreateEdit = () => {
               </div>
 
               <div className="flex-1">
-                <label className="block text-red-500 font-medium mb-1">Duration (in minutes)</label>
+                <label className="block text-red-500 font-medium mb-1">Duration (in hours)</label>
                 <input
                   type="number"
                   {...register("duration", { required: 'Duration is required' })}
@@ -150,7 +151,8 @@ export const CourseCreateEdit = () => {
               </div>
             </div>
 
-            <div className="mb-4">
+            <div className="flex flex-wrap gap-6 mb-8">
+              <div className="flex-1">
               <label className="block text-red-500 font-medium mb-1">Image</label>
               <input
                 type="file"
@@ -159,6 +161,17 @@ export const CourseCreateEdit = () => {
                 accept="image/*" // Optional: restrict to image files
               />
             </div>
+
+            <div className="flex-1">
+                <label className="block text-red-500 font-medium mb-1">Fee</label>
+                <input
+                  type="number"
+                  {...register("fee", { required: 'Fee is required' })}
+                  className="bg-white border border-gray-300 rounded p-2 w-full"
+                />
+                {errors.fee && <p className="text-red-500 text-sm">{errors.fee.message}</p>}
+              </div>
+              </div>
 
             <div className="mb-4">
               <label className="block text-red-500 font-medium mb-1">Description</label>

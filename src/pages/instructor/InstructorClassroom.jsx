@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { DetailsInstructor, GetStudyplan } from '../../api/Routing';
+import { DeleteStudyplan, DetailsInstructor, GetStudyplan } from '../../api/Routing';
 import { FileText, SquarePlay } from 'lucide-react';
 import { LoadingPage } from '../../LoadingPage';
+import { toast } from 'react-toastify';
 
 export const InstructorClassroom = () => {
   const { id } = useParams();
@@ -11,43 +12,68 @@ export const InstructorClassroom = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedCourseId, setSelectedCourseId] = useState(id); // Added state for selected course ID
-  const navigate= useNavigate();
+  const navigate = useNavigate();
+
+  const loadStudyplan = async () => {
+    try {
+      setLoading(true);
+     
+      const response = await GetStudyplan(selectedCourseId);
+      
+      if (response.data && response.data.activities) {
+        console.log("StudyplanId", response.data._id);
+        
+        setStudyplan(response.data.activities);
+        console.log("loadStudyplan", response.data.activities);
+      } else {
+        // Handle case where no study plan is found
+        setStudyplan([]); // Set study plan to an empty array or null as needed
+        toast.info("No study plan available for the selected course."); // Show a message
+        console.log("No study plan found.");
+      }
+     
+      const InstructorId = sessionStorage.getItem('InstructorId');
+      console.log("Instructor storage data", InstructorId);
+
+      const Instructor = await DetailsInstructor(InstructorId);
+      setCourse(Instructor.data.courses);
+      console.log("load courses", Instructor.data.courses);
+    } catch (error) {
+      setError(error);
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleClick = (courseId) => {
     setSelectedCourseId(courseId); // Update selected course ID
   };
 
+  const deleteStudyplan = async (courseId) => {
+    try {
+      const response = await DeleteStudyplan(courseId);
+      toast.success(response.message); // Show success message
+     
+      setTimeout(async () => {
+        await loadStudyplan(); // Reload study plan after deletion
+      }, 5000); // Delay of 1 second
+    } catch (error) {
+      console.error("Error deleting study plan:", error.response?.data.message || error.message);
+      toast.error(error.response?.data.message || "Error deleting study plan");
+    }
+  };
+
   useEffect(() => {
-    const loadStudyplan = async () => {
-      try {
-        setLoading(true);
-        // Fetch study plan based on the selected course ID
-        const response = await GetStudyplan(selectedCourseId);
-        setStudyplan(response.data.activities);
-        console.log("loadStudyplan", response.data.activities);
-
-        const InstructorId = sessionStorage.getItem('InstructorId');
-        console.log("Instructor storage data", InstructorId);
-
-        const Instructor = await DetailsInstructor(InstructorId);
-        setCourse(Instructor.data.courses);
-        console.log("load courses", Instructor.data.courses);
-      } catch (error) {
-        setError(error);
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     if (selectedCourseId) {
       loadStudyplan(); // Call the async function to load data
     }
   }, [selectedCourseId]); // Dependency array includes selectedCourseId
 
-  if (loading) return <div><LoadingPage/></div>;
+  if (loading) return <LoadingPage />;
+ 
   if (error) return <div>Error loading Studyplan details. Please try again later.</div>;
-  if (!Studyplan.length) return <div>No Studyplan found.</div>;
+ 
 
 
   return (
@@ -98,12 +124,20 @@ export const InstructorClassroom = () => {
             </div>
         ))}
           <li className="m-1 flex   justify-between   items-start	"> 
-                <Link to="studyplan" className="bg-green-500 text-white px-4 py-2  rounded hover:bg-blue-600">ADD</Link>
-                <Link to="studyplan" className="bg-blue-500 text-white px-4 py-2  rounded hover:bg-blue-600">UPDATE</Link>
-                <Link to="studyplan" className="bg-red-500 text-white px-4 py-2  rounded hover:bg-blue-600">DELETE</Link>
+                <Link to="studyplan" className="bg-green-500 text-white px-4 py-2  rounded hover:bg-blue-600">STUDY PLAN</Link>
+                <button 
+                    onClick={() => deleteStudyplan(selectedCourseId)} 
+                    className="bg-red-400 text-white px-4 py-2 rounded hover:bg-red-600"
+                  >
+                    Delete
+                  </button>
+                <Link to={`studyplan/${selectedCourseId}`} className="bg-blue-500 text-white px-4 py-2  rounded hover:bg-red-400">CHANGES</Link>
                </li>
         </ul>
         </div>
     </div>
   )
 }
+
+
+ 

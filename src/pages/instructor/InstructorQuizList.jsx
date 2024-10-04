@@ -18,7 +18,7 @@ export const InstructorQuizList = () => {
     setSelectedCourseId(courseId); // Update selected course ID
   };
 
-  const handleClick = async (id) => {
+  const QuizDeleteClick = async (id) => {
     try {
       await DeleteQuiz(id);
      //  Remove the Quiz item from state after deletion
@@ -132,11 +132,7 @@ export const InstructorQuizList = () => {
             <div className="dark:text-white mb-2 md:mb-0 whitespace-normal flex-1">
               <div className="text-lg font-semibold dark:text-white">Description:</div> {task.description}
             </div>
-            <div className="dark:text-white mb-2  md:mb-0  md:px-20  md:ml-auto text-right">
-               <div className="text-lg font-semibold dark:text-white">
-               <button className='btn bg-emerald-400 text-black text-lg'>Start</button>
-            </div>
-            </div>
+            
         </div>
         <div className="mt-2 flex flex-col md:flex-row md:justify-between md:space-x-4">
             <div className="dark:text-white mb-2 md:mb-0">
@@ -148,8 +144,12 @@ export const InstructorQuizList = () => {
               Instructor ID: </div>{task.instructor}
             </div>
            </div>
-           <div className="m-1 flex   justify-end "> 
-           <Link to={`/instructor/quizChange/${task._id}`} className="bg-blue-500 text-white px-4 py-2  rounded hover:bg-blue-600">CHANGE</Link>          
+           <div className="m-1 flex   justify-between   items-start"> 
+           <button  onClick={() => QuizDeleteClick(`${task._id}`)} 
+                    className="bg-red-400 text-white px-4 py-2 rounded hover:bg-red-600" >
+                    Delete
+           </button>
+           <Link to={`/instructor/${selectedCourseId}/quizChange/${task._id}`} className="bg-green-500 text-white px-4 py-2  rounded hover:bg-blue-600">CHANGE</Link>          
            </div>
 
         
@@ -163,6 +163,11 @@ export const InstructorQuizList = () => {
 }
 
 /*
+<div className="dark:text-white mb-2  md:mb-0  md:px-20  md:ml-auto text-right">
+               <div className="text-lg font-semibold dark:text-white">
+               <button className='btn bg-emerald-400 text-black text-lg'>Start</button>
+            </div>
+            </div>
 if(instructorId){ toast.error('An error occurred while fetching assignments.');}
 <div className="mt-2 flex flex-col md:flex-row md:justify-between md:space-x-4">
             <div className="dark:text-white mb-2 md:mb-0">

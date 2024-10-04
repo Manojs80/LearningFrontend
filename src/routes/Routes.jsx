@@ -192,7 +192,7 @@ export const router = createBrowserRouter([
           element:  <Assignment/>
         },
         {
-          path: "AssignmentList/:id/assignmet/:id",
+          path: ":courseId/assignmetChange",
           element:  <Assignment/>
         },
         {
@@ -204,7 +204,7 @@ export const router = createBrowserRouter([
           element: <QuizAdd/>
         },
         {
-          path: "quizChange/:id",
+          path: ":courseId/quizChange/:id",
           element: <Quiz/>
         },
         {
@@ -212,11 +212,11 @@ export const router = createBrowserRouter([
           element: <FeedbackMessage/>
         },
         {
-          path: "Course/:id/studyplan",
+          path: "Course/:courseId/studyplan",
           element: <SplanCreateEdit/>
         },
         {
-          path: "Course/66c431f1c8addb7d24853198/studyplan/:id",
+          path: "Course/:courseId/studyplan/:id",
           element: <SplanCreateEdit/>
         },
         {
