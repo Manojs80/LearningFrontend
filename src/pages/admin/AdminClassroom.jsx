@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 export const AdminClassroom = () => {
   const [courses, setCourses] = useState([]);
-
+  const [refresh, setRefresh] = useState(false);
   // Fetch courses from the server
   const fetchCourses = async () => {
     try {
@@ -22,7 +22,7 @@ export const AdminClassroom = () => {
   const handleDelete = async (id) => {
     try {
       await DeleteCourse(id);
-      setCourses(courses.filter(course => course.id !== id));
+      setRefresh((prev) => !prev); // Trigger a re-fetch
     } catch (error) {
       console.error('Error deleting course:', error);
     }
@@ -30,7 +30,7 @@ export const AdminClassroom = () => {
 
   useEffect(() => {
     fetchCourses();
-  }, []);
+  }, [refresh]);
 
   return (
     <div className="container mx-auto p-5">

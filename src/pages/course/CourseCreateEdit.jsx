@@ -80,7 +80,7 @@ export const CourseCreateEdit = () => {
       } else {
        await CreateCourse(formData);
       }
-      toast.success('Success');
+      toast.success('Success please Refresh page');
       navigate(`/Instructor/home`); // Adjust path as needed
     } catch (error) {
       toast.error(error.message || 'Error saving course data');
