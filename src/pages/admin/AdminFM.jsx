@@ -41,6 +41,7 @@ export const AdminFM = () => {
 
   return (
     <div className="p-4">
+      <h1 className="text-2xl font-bold mb-4 text-green-500 text-center">Feedback/Message</h1>
       <ul className="space-y-4">
         {feedback.map((row, index) => (
           <li key={row._id} className="p-4 border rounded-md shadow-sm">

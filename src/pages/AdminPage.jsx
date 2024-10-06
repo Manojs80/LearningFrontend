@@ -55,6 +55,7 @@ import { LoadingPage } from '../LoadingPage'
              <li className="mb-3"><Link to="Assignments" className=" hover:underline">Assignments</Link></li>
              <li className="mb-3"><Link to="QuizList" className="hover:underline">Quiz List</Link></li>
              <li className="mb-3"><Link to="feedback/message" className=" hover:underline">Feedback/Message</Link></li>
+             <li className="mb-3"><Link to="Enquiries" className=" hover:underline">Enquiries</Link></li>
              </ul>
            </div>
          </aside> 

@@ -39,13 +39,15 @@ export const QuizAdd = () => {
   useEffect(() => {
     if (courseId) {
       setValue('course', courseId);
-      const InstructorId = sessionStorage.getItem('InstructorId');
+       const InstructorId = sessionStorage.getItem('InstructorId');
       setValue('instructor',InstructorId || '');
     }
   }, [courseId, setValue]);
 
   const onSubmit = async (data) => {
     try {
+      const Response = sessionStorage.getItem('Role');
+      console.log("createquiz Response",Response);
       // Optional: Validate correctAnswerIndex
       data.questions.forEach(question => {
         const index = parseInt(question.correctAnswerIndex, 10);
@@ -58,7 +60,13 @@ export const QuizAdd = () => {
       await CreateQuiz(data);
       console.log(" Create quiz ",data);
       toast.success('Success');
-      navigate(`/instructor/Course/Quizs/${courseId}`);
+      if (!Response) {
+        navigate(`/instructor/Course/Quizs/${courseId}`);
+       } else {
+        navigate(`/Admin/QuizList/${courseId}`);
+       }        
+      
+    
     } catch (error) {
       toast.error(error.message || 'Error saving quiz');
     }

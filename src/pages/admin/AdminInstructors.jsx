@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 export const AdminInstructors = () => {
   
   const [instructors, setInstructors] = useState([]);
-
+  const [refresh, setRefresh] = useState(false);
   // Fetch instructors from the server
   const fetchInstructors = async () => {
     try {
@@ -23,7 +23,7 @@ export const AdminInstructors = () => {
   const handleDelete = async (id) => {
     try {
       await DeleteInstructor(id); // Adjust this function to your API
-      setInstructors(instructors.filter(instructor => instructor.id !== id));
+      setRefresh((prev) => !prev); // Trigger a re-fetch
     } catch (error) {
       console.error('Error deleting instructor:', error);
     }
@@ -31,11 +31,11 @@ export const AdminInstructors = () => {
 
   useEffect(() => {
     fetchInstructors();
-  }, []);
+  }, [refresh]);
 
   return (
     <div className="container mx-auto p-5">
-      <h1 className="text-2xl font-bold mb-4 text-center">Instructors List</h1>
+      <h1 className="text-2xl font-bold mb-4 text-green-500 text-center">Instructors List</h1>
       <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
         <thead className="bg-gray-200">
           <tr>

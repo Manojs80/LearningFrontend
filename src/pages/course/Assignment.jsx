@@ -23,6 +23,7 @@ export const Assignment = () => {
       console.log("Assignment",id);
       console.log("Assignment courseId",courseId);
       const loadData = async () => {
+        
         if (isEdit){
           setValue('course', id || '');
           const InstructorId = sessionStorage.getItem('InstructorId');
@@ -57,16 +58,26 @@ export const Assignment = () => {
       const onSubmit = async (data) => {
         try {
           console.log("frontend",data);
-          
+          const Response = sessionStorage.getItem('Role');
+           console.log("UpdateAssignment Response",Response);
           if (courseId) {
            await UpdateAssignment(courseId,data);
            console.log("UpdateAssignment",courseId);
-           navigate(`/Instructor/Course/AssignmentList/${courseId}`);
+           if (!Response) {
+            navigate(`/Instructor/Course/AssignmentList/${courseId}`);
+           } else {
+            navigate(`/Admin/Assignments/${courseId}`);
+           }
+          
            
           } else {
             await CreateAssignment(data);
            console.log(" CreateAssignment");
-           navigate(`/Instructor/Course/AssignmentList/${id}`);
+           if (!Response) {
+            navigate(`/Instructor/Course/AssignmentList/${id}`);
+           } else {
+            navigate(`/Admin/Assignments/${id}`);
+           }        
           }
           toast.success('Success');
           

@@ -52,7 +52,7 @@ export const AdminProfile = () => {
           <li className="border-b py-2">Email: {Learner.email} </li>
           <li className="border-b py-2"> Role: {Learner.role}</li>
           <li className="border-b py-2"> Mobile No: {Learner.mobile}</li>
-          <li className="border-b py-2"> course:</li>
+          
         </ul>
       </section>
 

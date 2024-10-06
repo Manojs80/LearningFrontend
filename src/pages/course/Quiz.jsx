@@ -58,10 +58,17 @@ export const Quiz = () => {
 
   const onSubmit = async (data) => {
     try {
+      const Response = sessionStorage.getItem('Role');
+      console.log("createquiz Response",Response);
       console.log("frontend",data);        
         await UpdateQuiz(id,data);   
       toast.success('Success');
-      navigate(`/instructor/Course/Quizs/${courseId}`)
+      if (!Response) {
+        navigate(`/instructor/Course/Quizs/${courseId}`)
+       } else {
+        navigate(`/Admin/QuizList/${courseId}`);
+       } 
+      
 
     } catch (error) {
       toast.error(error.message || 'Error saving study plan');

@@ -53,7 +53,8 @@ export const LearnerProfileEdit = () => {
 
   const onSubmit = async (data) => {
     const formData = new FormData();
-
+    const Response = sessionStorage.getItem('Role');
+    console.log("edit Response",Response);
     // Append normal fields
     Object.keys(data).forEach(key => {
       if (key === 'courses') {
@@ -81,7 +82,12 @@ export const LearnerProfileEdit = () => {
     try {
       await UpdateLearner(id, formData);
       toast.success("Learner updated successfully");
-      navigate(`/Learner/${id}`);
+      if (!Response) {
+        navigate(`/Learner/${id}`);
+       } else {
+        navigate(`/Admin/Learners/${id}`);
+       } 
+    
     } catch (error) {
       console.log("Error in editing Learner:", error.response?.data || error);
       toast.error(error.response?.data?.error || 'An error occurred');

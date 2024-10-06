@@ -1,4 +1,5 @@
 
+
 import React, { useEffect, useState } from 'react'
 import { DeleteQuiz, DetailsInstructor, QuizListGet } from '../../api/Routing';
 import { Link, useParams } from 'react-router-dom';
@@ -6,17 +7,16 @@ import { toast } from 'react-toastify';
 import { LoadingPage } from '../../LoadingPage';
 
 
-export const InstructorQuizList = () => {
+export const AdminQuizDetails = () => {
   const {id} = useParams();
+
   console.log("Loading quiz list...id1",id);
   const [QuizList, setQuizList] = useState([]);
-  const [Course, setCourse] = useState([]); 
+  
   const [selectedCourseId, setSelectedCourseId] = useState(id); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const handleCourse = (courseId) => {
-    setSelectedCourseId(courseId); // Update selected course ID
-  };
+  
 
   const QuizDeleteClick = async (id) => {
     try {
@@ -40,13 +40,6 @@ export const InstructorQuizList = () => {
         console.log("Quiz list loaded successfully.");
         setQuizList(response.data);
 
-        const instructorId = sessionStorage.getItem('InstructorId');
-        console.log("Instructor storage data", instructorId);
-
-        const instructor = await DetailsInstructor(instructorId);
-        setCourse(instructor.data.courses);
-        console.log("load courses", instructor.data.courses);
-
       }else {
         // Handle case where there are no assignments
         setQuizList([]); // Clear previous assignments
@@ -60,7 +53,7 @@ export const InstructorQuizList = () => {
     } catch (error) {
       
       console.error(error);
-      if(instructorId){ toast.error('An error occurred while fetching assignments.');}
+      
     } finally {
         setLoading(false);
       }
@@ -75,23 +68,18 @@ export const InstructorQuizList = () => {
   }, [selectedCourseId]);   
   
   if (loading) return <div><LoadingPage/></div>;
-  if (error) return <div>Error loading Studyplan details. Please try again later.</div>;
-  if (!QuizList) return <div>No Studyplan found.</div>;
+  if (error) return <div>Error loading Quiz details. Please try again later.</div>;
+  if (!QuizList) return <div>No Quiz found.</div>;
 
   return (
  
   <div className="p-4">
-      <h1 className=" mb-6 text-center text-2xl font-bold text-green-500" >Instructor Quiz</h1>
+     
        
       <h2 className="text-xl font-semibold text-blue-500">Courses</h2>
       
-     {Course.map((row,index) => (
-        <div className="flex flex-col p-4 mx-12">
-      <button onClick={() => handleCourse(row)} className="bg-pink-500 text-white px-4 py-2  rounded hover:bg-blue-600">{index+1} : {row}</button>
-      </div>
-       ))}
-       <div className="bg-green-800 text-center text-blue font-bold my-5 p-2">
-      Selected:
+      <div className="bg-green-800 text-center text-blue font-bold my-5 p-2">
+         Selected:
         <h1 className="text-zinc-950 text-2xl">{selectedCourseId}</h1>
         </div>
 
@@ -99,7 +87,7 @@ export const InstructorQuizList = () => {
         <div className="text-center my-6">
           <h1 className="text-zinc-950 bg-white m-1 text-2xl">No Quiz found for the selected course.</h1> 
           <Link 
-           to={`/instructor/quizAdd/${selectedCourseId}`} 
+           to={`/Admin/quizAdd/${selectedCourseId}`} 
           className="bg-green-500 text-white m-1 px-4 py-2 rounded hover:bg-blue-600"
            >
            Add Quiz
@@ -111,7 +99,7 @@ export const InstructorQuizList = () => {
     <ul className="space-y-4   ">
           <div className="text-center my-6">
         <Link 
-        to={`/instructor/quizAdd/${selectedCourseId}`} 
+        to={`/Admin/quizAdd/${selectedCourseId}`} 
         className="bg-green-500 text-white m-1 px-4 py-2 rounded hover:bg-blue-600"
       >
         Add Quiz
@@ -125,11 +113,11 @@ export const InstructorQuizList = () => {
                  <div className="text-lg font-semibold dark:text-white">No:  {index+1}
                  </div>
             </div>
-            <div className="dark:text-white mb-2 md:mb-0 flex-1">
+            <div className="dark:text-white  mb-2 md:mb-0 flex-1 ">
               <div className="text-lg font-semibold dark:text-white">Topic:  {task.title}
               </div>
             </div>
-            <div className="dark:text-white mb-2 md:mb-0 whitespace-normal flex-1">
+            <div className="dark:text-white mb-2 md:ms-12 md:mb-0 whitespace-normal ">
               <div className="text-lg font-semibold dark:text-white">Description:</div> {task.description}
             </div>
             
@@ -149,7 +137,7 @@ export const InstructorQuizList = () => {
                     className="bg-red-400 text-white px-4 py-2 rounded hover:bg-red-600" >
                     Delete
            </button>
-           <Link to={`/instructor/${selectedCourseId}/quizChange/${task._id}`} className="bg-green-500 text-white px-4 py-2  rounded hover:bg-blue-600">CHANGE</Link>          
+           <Link to={`/Admin/${selectedCourseId}/quizChange/${task._id}`} className="bg-green-500 text-white px-4 py-2  rounded hover:bg-blue-600">CHANGE</Link>          
            </div>
 
         
@@ -161,3 +149,4 @@ export const InstructorQuizList = () => {
   
   )
 }
+

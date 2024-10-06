@@ -27,6 +27,7 @@ export const LoginPage = () => {
           loginbackend = await Instructorlogin(data);
       } else if (role === 'admin') {
           loginbackend = await Adminlogin(data);
+          sessionStorage.setItem('Role',role);
       }
       
       // Debug: Check the loginbackend structure

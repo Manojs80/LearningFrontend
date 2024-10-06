@@ -27,7 +27,7 @@ export const CreateCourse = async (formData)=> {
               const response = await axios({
                   method: 'get',
                   url: `${apiUrl}/v1/course/courseList`,
-                  
+                
                 });
               return  response.data
           } catch (error) {
@@ -363,7 +363,7 @@ export const UpdateAssignment = async (id,formData)=> {
       const response = await axios({
           method: 'put',
           url: `${apiUrl}/v1/assignment/update/${id}`,
-          data: formData,  
+          data: formData, 
           headers: {
             'Content-Type': 'application/json', // Set headers if you are sending form data
           }, 
@@ -716,7 +716,7 @@ export const CreateContact = async (data)=> {
   }
 }
 
-//getall course
+//getall Contact
     export const ContactList = async ()=> {
          
           try {
@@ -730,7 +730,7 @@ export const CreateContact = async (data)=> {
             throw error  
           }
       }
-//DetailsCourse
+//DetailsContact
 export const DetailsContact = async (id)=> {
   console.log("axios Contact detail",id);
   console.log(`${apiUrl}/v1/contact/get/${id}`);
@@ -745,7 +745,7 @@ export const DetailsContact = async (id)=> {
   }
 }
 
-//delete course
+//delete Contact
 export const DeleteContact = async (id)=> {
   console.log("Delete Contact frontapi",`${apiUrl}/v1/contact/delete/${id}`);
   try {

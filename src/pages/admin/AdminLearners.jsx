@@ -9,7 +9,7 @@ export const AdminLearners = () => {
   
   
     const [Learners, setLearners] = useState([]);
-  
+    const [refresh, setRefresh] = useState(false);
     // Fetch instructors from the server
     const fetchLearners = async () => {
       try {
@@ -24,7 +24,8 @@ export const AdminLearners = () => {
     const handleDelete = async (id) => {
       try {
         await DeleteLearner(id); // Adjust this function to your API
-        setLearners(Learners.filter(Learner => Learner._id !== id));
+        setRefresh((prev) => !prev); // Trigger a re-fetch
+        
       } catch (error) {
         console.error('Error deleting instructor:', error);
       }
@@ -32,11 +33,11 @@ export const AdminLearners = () => {
   
     useEffect(() => {
       fetchLearners();
-    }, []);
+    }, [refresh]);
   
     return (
       <div className="container mx-auto p-5">
-        <h1 className="text-2xl font-bold mb-4 text-center">Learners List</h1>
+        <h1 className="text-2xl font-bold mb-4 text-green-500 text-center">Learners List</h1>
         <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
           <thead className="bg-gray-200 ">
             <tr>

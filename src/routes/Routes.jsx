@@ -44,6 +44,8 @@ import { PaymentCancel } from "../pages/course/PaymentCancel";
 import { FooterPage } from "../pages/FooterPage";
 import { PaymentLogin } from "../components/PaymentLogin";
 import { AdminAssignmentsDetails } from "../pages/admin/AdminAssignmentsDetails";
+import { AdminQuizDetails } from "../pages/admin/AdminQuizDetails";
+import { AdminEnquiries } from "../pages/admin/AdminEnquiries";
 
 
 
@@ -273,6 +275,14 @@ export const router = createBrowserRouter([
           element:  <AdminAssignmentsDetails/>
         },
         {
+          path: "assignmetAdd/:id",
+          element:  <Assignment/>
+        },
+        {
+          path: "assignmetChange/:courseId",
+          element:  <Assignment/>
+        },
+        {
           path: "Learners",
           element:  <AdminLearners/>
         },
@@ -290,11 +300,22 @@ export const router = createBrowserRouter([
         },
         {
           path: "QuizList/:id",
-          element:  <InstructorQuizList/>
+          element:  <AdminQuizDetails/>
+        }, {
+          path: "quizAdd/:id",
+          element: <QuizAdd/>
+        },
+        {
+          path: ":courseId/quizChange/:id",
+          element: <Quiz/>
         },
         {
           path: "feedback/message",
           element:  <AdminFM/>
+        },
+        {
+          path: "Enquiries",
+          element:  <AdminEnquiries/>
         },
         {
           path: "*",

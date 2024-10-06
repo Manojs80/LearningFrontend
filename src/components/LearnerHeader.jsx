@@ -47,6 +47,10 @@ export const LearnerHeader = () => {
     try {
       const logres = await Logout();
       Cookies.remove('token', { path: '/api' }); 
+     
+      sessionStorage.removeItem('loginId');
+      sessionStorage.removeItem('Role'); // Remove Role if it exists
+      sessionStorage.removeItem('InstructorId'); // Remove InstructorId if it exists
       
       if (logres && logres.message) {
         toast.success(logres.message);

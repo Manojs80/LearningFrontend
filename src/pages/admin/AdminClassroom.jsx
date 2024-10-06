@@ -34,7 +34,7 @@ export const AdminClassroom = () => {
 
   return (
     <div className="container mx-auto p-5">
-      <h1 className="text-2xl font-bold mb-4 text-center">Course List</h1>
+      <h1 className="text-2xl font-bold mb-4 text-green-500 text-center">Course List</h1>
       <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
         <thead className="bg-gray-200">
           <tr>

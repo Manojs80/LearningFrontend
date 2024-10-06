@@ -51,7 +51,8 @@ export const InstructorProfileEdit = () => {
 
   const onSubmit = async (data) => {
     const formData = new FormData();
-
+    const Response = sessionStorage.getItem('Role');
+    console.log("edit Response",Response);
     // Append normal fields
     Object.keys(data).forEach(key => {
       if (key === 'courses') {
@@ -82,7 +83,12 @@ export const InstructorProfileEdit = () => {
     try {
       await UpdateInstructor(id, formData);
       toast.success("Instructor updated successfully");
-      navigate(`/Instructor/${id}`);
+      if (!Response) {
+        navigate(`/Instructor/${id}`);
+       } else {
+        navigate(`/Admin/Instructors/${id}`);
+       } 
+      
     } catch (error) {
       console.log("Error in editing Instructor:", error.response?.data || error);
       toast.error(error.response?.data?.error || 'An error occurred');
