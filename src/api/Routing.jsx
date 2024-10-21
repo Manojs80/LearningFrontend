@@ -272,6 +272,9 @@ export const GetStudyplan = async (id)=> {
 //update studyplan
 export const UpdateStudyplan = async (id,formData)=> {
   console.log("axios studyplan update",id);
+  for (let [key, value] of formData.entries()) {
+    console.log(key, value);
+  }
   console.log(`${apiUrl}/v1/studyplan/update/${id}`);
   try {
       const response = await axios({
@@ -279,8 +282,8 @@ export const UpdateStudyplan = async (id,formData)=> {
           url: `${apiUrl}/v1/studyplan/update/${id}`,
           data: formData,  
           headers: {
-            'Content-Type': 'application/json', // Set headers if you are sending form data
-          }, 
+            'Content-Type': 'application/json', 
+          },
         });
         console.log("response",response)
       return  response
@@ -392,6 +395,119 @@ export const DeleteAssignment = async (id)=> {
     throw error  
   }
 }
+//submit Assignment
+export const SubmitAssignment = async (payload)=> {
+   console.log("axios SubmitAssignment create",payload);
+  console.log("axios SubmitAssignment create",);
+  console.log(`${apiUrl}/v1/submission/create`);
+  try {
+      const response = await axios({
+          method: 'post',
+          url: `${apiUrl}/v1/submission/create`,
+          data: payload,  
+          headers: {
+            'Content-Type': 'application/json', 
+          },
+        });
+       
+      return  response.data
+  } catch (error) {
+    if (error.response && error.response.data) {
+      throw new Error(error.response.data.message || 'Unknown error');
+    }
+    throw new Error('Network or server error');
+   
+  }
+}
+//DeleteSubmission
+export const DeleteSubmission = async (id)=> {
+  console.log("Delete Submission frontapi",`${apiUrl}/v1/Submission/delete/${id}`);
+  try {
+      const response = await axios({
+          method: 'delete',
+          url: `${apiUrl}/v1/Submission/delete/${id}`,
+          
+        });
+      return  response.data
+  } catch (error) {
+    throw error  
+  }
+}
+//getSubmissionList
+export const getSubmissionList = async (id)=> {
+  console.log("getSubmissionList frontapi",`${apiUrl}/v1/submission/submissionList/${id}`);
+  try {
+      const response = await axios({
+          method: 'get',
+          url: `${apiUrl}/v1/submission/submissionList/${id}`,
+          
+        });
+      return  response.data
+  } catch (error) {
+    throw error  
+  }
+}
+//getSubmission
+export const getSubmission = async (id)=> {
+  console.log("getSubmissionList frontapi",`${apiUrl}/v1/submission/${id}`);
+  try {
+      const response = await axios({
+          method: 'get',
+          url: `${apiUrl}/v1/submission/${id}`,
+          
+        });
+      return  response.data
+  } catch (error) {
+    throw error  
+  }
+}
+//updateSubmission
+export const updateSubmission = async (id,scoreData)=> {
+  console.log("axios updateSubmission update",id);
+  console.log("axios updateSubmission update",scoreData);
+  console.log(`${apiUrl}/v1/Submission/update/${id}`);
+  try {
+      const response = await axios({
+          method: 'put',
+          url: `${apiUrl}/v1/Submission/update/${id}`,
+          data: scoreData, 
+          headers: {
+            'Content-Type': 'application/json', // Set headers if you are sending form data
+          }, 
+        });
+        console.log("response",response)
+      return  response
+  }catch (error) {
+    if (error.response && error.response.data) {
+      throw new Error(error.response.data.message || 'Unknown error');
+    }
+    throw new Error('Network or server error');
+   
+  }
+}
+//Learner Submitupdate
+export const Submitupdate = async (id,scoreData)=> {
+  console.log("axios learner updateSubmission ",id);
+  console.log("axios learner update Submission ",scoreData);
+  console.log(`${apiUrl}/v1/Submission/update/${id}`);
+  try {
+      const response = await axios({
+          method: 'put',
+          url: `${apiUrl}/v1/Submission/update/${id}`,
+          data: scoreData, 
+          headers: {
+            'Content-Type': 'application/json', // Set headers if you are sending form data
+          }, 
+        });
+        console.log("response",response)
+      return  response
+  }catch (error) {
+    if (error.response && error.response.data) {
+      throw new Error(error.response.data.message || 'Unknown error');
+    }
+    throw new Error('Network or server error');
+  }
+  }
 // crete quiz
 export const CreateQuiz = async (formData)=> {
   console.log("axios quiz create",formData);

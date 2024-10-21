@@ -46,6 +46,7 @@ import { PaymentLogin } from "../components/PaymentLogin";
 import { AdminAssignmentsDetails } from "../pages/admin/AdminAssignmentsDetails";
 import { AdminQuizDetails } from "../pages/admin/AdminQuizDetails";
 import { AdminEnquiries } from "../pages/admin/AdminEnquiries";
+import { InstructorSubmission } from "../pages/instructor/instructorSubmission";
 
 
 
@@ -188,6 +189,10 @@ export const router = createBrowserRouter([
         {
           path: "course/AssignmentList/:id",
           element:  <InstructorAssignment/>
+        },      
+        {
+          path: "course/SubmissionList/:id",
+          element:  <InstructorSubmission/>
         },
         {
           path: "assignmetAdd/:id",

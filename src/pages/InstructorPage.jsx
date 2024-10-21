@@ -60,6 +60,9 @@ export const InstructorPage = () => {
               {firstCourseId && (
               <li className="mb-3"><Link to={`Course/AssignmentList/${firstCourseId}`} className=" hover:underline">Assignments</Link></li>
             )} 
+             {firstCourseId && (
+              <li className="mb-3"><Link to={`Course/SubmissionList/${firstCourseId}`} className=" hover:underline">Submission</Link></li>
+            )} 
               {firstCourseId && (
               <li className="mb-3"><Link to={`Course/Quizs/${firstCourseId}`} className="hover:underline">Quizs</Link></li>
             )} 

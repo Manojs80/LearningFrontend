@@ -69,13 +69,17 @@ export const LearnerPage = () => {
       }`} style={{ width: `calc(100% - ${isSidebarOpen ? '240px' : '0px'})` }}>
           <header className="flex justify-between items-center  bg-blue-600 text-white ">
              {/* Sidebar Toggle Button */}
-           <button onClick={toggleSidebar}  className="flex items-center p-2">
-               {isSidebarOpen ? (
-                  <ArrowLeftFromLine size={28} color="#e20808" strokeWidth={3} />
-                  ):(
-                   <ArrowRightFromLine size={28} color="#08e24a" strokeWidth={3} />     
+             <div className="flex items-center p-2">
+              <button onClick={toggleSidebar} className="mr-2">
+                 {isSidebarOpen ? (
+                   <ArrowLeftFromLine size={28} color="#e20808" strokeWidth={3} />
+                     ) : (
+                   <ArrowRightFromLine size={28} color="#08e24a" strokeWidth={3} />
                  )}
-        </button>
+              </button>
+               <h6 className="font-semibold uppercase">{Learner.role}</h6>
+             </div>
+
         <h1 className="text-2xl font-bold uppercase">{Learner.name}</h1>
         <h6 className="text-sm font-semibold pe-5">Id : {Learner._id}</h6>
           </header>

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -8,7 +7,7 @@ import { CreateStudyplan, GetStudyplan, UpdateStudyplan } from '../../api/Routin
 export const SplanCreateEdit = () => {
   const { control, register, handleSubmit, setValue, reset } = useForm({
     defaultValues: {
-      activities: [{ task: '', taskDescription: '' }]
+      activities: [{ task: '', taskDescription: '', videoUrl: '', pdfNote: null }]
     }
   });
 
@@ -23,18 +22,18 @@ export const SplanCreateEdit = () => {
   const [StudyplanId, setStudyplanId] = useState([]);
 
   const loadData = async () => {
-    if (!isEdit){
+    if (!isEdit) {
       setValue('courseId', courseId || '');
       const InstructorId = sessionStorage.getItem('InstructorId');
-      setValue('instructor',InstructorId || '');
+      setValue('instructor', InstructorId || '');
       return;
     }
-     
+    
     try {
       const res = await GetStudyplan(id);
       const formData = res.data;
-      setStudyplanId(res.data._id)
-      console.log("GetStudyplan",res.data);
+      setStudyplanId(res.data._id);
+      console.log("GetStudyplan", res.data);
       
       if (formData.activities) {
         reset({ activities: [] });
@@ -54,11 +53,33 @@ export const SplanCreateEdit = () => {
   }, [id]);
 
   const onSubmit = async (data) => {
+    const formData = new FormData();
+    
+    // Append form data
+    formData.append('courseId', data.courseId);
+    formData.append('instructor', data.instructor);
+    
+    data.activities.forEach((activity, index) => {
+     // console.log(`Activity ${index}:`, activity); // Log activity to see its structure
+      formData.append(`activities[${index}].task`, activity.task);
+      formData.append(`activities[${index}].taskDescription`, activity.taskDescription);
+     
+    // Append videoUrl only if it is defined, otherwise append an empty string
+    const videoUrl = activity.videoUrl && activity.videoUrl !== 'undefined' ? activity.videoUrl : '';
+    formData.append(`activities[${index}].videoUrl`, videoUrl);
+    const NoteUrl = activity.pdfNote && activity.pdfNote !== 'undefined' ? activity.pdfNote : '';
+    formData.append(`activities[${index}].pdfNote`,NoteUrl);
+     
+    });
+
     try {
       if (isEdit) {
-        await UpdateStudyplan(StudyplanId, data);
+        // for (let [key, value] of formData.entries()) {
+        //   console.log(key, value);
+        // }
+        await UpdateStudyplan(StudyplanId, formData);
       } else {
-        await CreateStudyplan(data);
+        await CreateStudyplan(formData);
       }
       toast.success('Success');
       navigate(`/Instructor/Course/${courseId}`);
@@ -97,7 +118,6 @@ export const SplanCreateEdit = () => {
                   control={control}
                   render={({ field }) => (
                     <input
-                      type="number"  // Changed to text to match the data type
                       {...field}
                       placeholder="Task (1,2,..)"
                       className="border p-2"
@@ -115,6 +135,37 @@ export const SplanCreateEdit = () => {
                     />
                   )}
                 />
+                <Controller
+                  name={`activities[${index}].videoUrl`}
+                  control={control}
+                  render={({ field }) => (
+                    <input
+                      {...field}
+                      placeholder="Video URL"
+                      className="border p-2"
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        field.onChange(value || ''); // Ensure it's not set to the string "undefined"
+                    }}
+                    />
+                  )}
+                />
+                <Controller
+                  name={`activities[${index}].pdfNote`}
+                  control={control}
+                  render={({ field }) => (         
+                    <input
+                    {...field}
+                    placeholder="Note URL"
+                    className="border p-2"
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      field.onChange(value || ''); // Ensure it's not set to the string "undefined"
+                  }}
+                    />
+                
+                  )}
+                />
                 
                 <button
                   type="button"
@@ -127,7 +178,7 @@ export const SplanCreateEdit = () => {
             ))}
             <button
               type="button"
-              onClick={() => append({ task: '', taskDescription: '', completed: false })}
+              onClick={() => append({ task: '', taskDescription: '', videoUrl: '', pdfNote: '' })}
               className="bg-blue-500 text-white p-2 rounded"
             >
               Add Activity
@@ -144,6 +195,3 @@ export const SplanCreateEdit = () => {
     </div>
   );
 };
-
-
-
